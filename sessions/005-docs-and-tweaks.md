@@ -23,9 +23,15 @@ Updated `README.md` with a live site callout at the top and a new "Deployment" s
 
 Split the single `.chant` into three elements with a class each: `.chant-desktop` (the original full row, hidden on mobile), `.chant-mobile-top` (shown above center on mobile), and `.chant-mobile-bottom` (shown at bottom on mobile). A `@media (max-width: 600px)` block hides the desktop version and reveals the stacked pair, positioning `.chant-mobile-top` at `top: 12vh` and bumping the font-size to `clamp(22px, 8vw, 52px)` since `5.5vw` on a narrow screen undercuts the min. Also updated `KICKOFF.md` session-start and session-end instructions to make `preview` the default working branch and to include the full commit → verify → merge → ship command sequence.
 
+### 3. Landscape notch border
+
+> I committed those to preview, but I haven't pushed to main yet. This is great, if however I rotate my phone sideways, it still shows a white border where the notch is.
+
+iOS Safari leaves a white strip in the safe area on the notched side when a page doesn't explicitly claim that space. Two-line fix: added `viewport-fit=cover` to the viewport meta tag so the page is allowed to extend under the notch, and added `html { background: #000 }` so the area behind the notch inherits black instead of the browser default white. The body gradient still covers the main viewport — this just fills the letterbox strips on either side in landscape.
+
 ## Files touched
 
-- `index.html` (mobile chant layout)
+- `index.html` (mobile chant layout, viewport-fit=cover, html background fix)
 - `README.md` (live site callout, Deployment section)
 - `KICKOFF.md` (live URL, deployment model, preview-branch workflow, session-end commands)
 - `sessions/README.md` (added session 004 to index)
