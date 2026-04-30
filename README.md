@@ -1,39 +1,49 @@
 # like67.com
 
-A single-purpose joke site. When someone says "like 6... 7" you pull up the page.
+The site is a joke. The rest of this folder is the *story* of how it got made — every prompt, every change, kept in the open. Want to see how? Start with [`JOURNAL.md`](./JOURNAL.md) and read top to bottom.
 
-**The site is live at [like67.com](https://like67.com).**
+**The site is live at [like67.com](https://like67.com).** When someone says "like 6... 7," you pull up the page.
 
-This repo is the site itself plus a transparent record of how it was built — every prompt, every change, kept in the open. If you're reading this trying to figure out how someone makes a thing like this, follow [`JOURNAL.md`](./JOURNAL.md) for the arc, or jump straight into [`sessions/`](./sessions/) for the raw transcripts.
+The whole site — code, domain, hosting, every feature — was built across seven sessions on a single afternoon (April 29, 2026). The code was written entirely by an AI; the human did the prompting and ran the commands that touch the outside world (git, hosting, the domain).
 
-## What's where
+## What each file is
 
-- `index.html` — the site
-- `assets/` — images, sounds, whatever the joke needs
-- `JOURNAL.md` — dated entries, one per work session, with links into the raw transcripts
-- `sessions/` — prompt-and-action transcripts of each session with an AI assistant
-- `KICKOFF.md` — a paste-ready prompt for starting a new session with an AI assistant; it carries the documentation rules forward so they don't drift
+- `index.html` — the actual website. Open it in a browser and you've got the whole site.
+- `assets/` — pictures and icons used by the page.
+- `manifest.json` — tells phones how to save the site as an app.
+- `JOURNAL.md` — a dated log of every work session, with links to the full transcripts. Read this top to bottom for the story arc.
+- `sessions/` — the raw conversations with the AI, one file per session. This is where the actual making lives.
+- `LICENSE` — the legal note (CC BY-NC 4.0 — fine to learn from, not for commercial use).
+- `KICKOFF.md` — a paste-ready prompt for AI assistants. Skip this one; it's for the AI, not for you.
+- `.gitignore` — bookkeeping; tells git which files to ignore.
 
-## Deployment
+## Tools used
 
-The site is hosted on [Cloudflare Pages](https://pages.cloudflare.com/), which watches this GitHub repo and deploys automatically on every push — no manual deploy step needed.
+- **Claude / Claude Cowork** — the AI assistant that wrote the code. Cowork is a desktop app that gives the AI direct read/write access to a project folder, so prompts can become real file changes. Requires a Claude account.
+- **GitHub** — stores the code and the full history of every change. Free; the page you're reading right now is GitHub.
+- **Cloudflare Pages** — puts the website on the internet and re-publishes it automatically every time code is pushed. Free.
+- **Namecheap** — where the domain `like67.com` was registered. About $10/year, and optional — Cloudflare gives every project a free `*.pages.dev` URL automatically.
 
-- **Production** (`main` branch) → [like67.com](https://like67.com)
-- **Any other branch** → auto-gets a preview URL at `[branch-name].like67-com.pages.dev`
+## How it gets to the internet
 
-So the workflow is: make changes on a branch (e.g. `preview`), push to GitHub, check `preview.like67-com.pages.dev` on a real device, then merge to `main` when it looks good. Production updates within about a minute of the merge.
+Cloudflare Pages watches this GitHub repo (the folder GitHub stores) and rebuilds the site every time anyone pushes (uploads a change).
 
-You don't need a Cloudflare account to follow along — just note that the "deploy" step in the session logs is just `git push`.
+- `main` branch → **production** at [like67.com](https://like67.com)
+- Any other branch → an auto-generated preview URL at `[branch-name].like67-com.pages.dev`
+
+So the workflow is: make changes on a branch like `preview`, push to GitHub, check `preview.like67-com.pages.dev` on a real device, then merge into `main` to ship. Production updates about a minute later.
+
+"Deploy" in the session logs just means `git push`. No buttons to click.
 
 ## How this is documented
 
 Two rules keep the record clean:
 
-- **File changes are made by the AI.** Whatever code or content lands in the repo, the AI wrote it. The diff IS the documentation of what changed.
-- **Commands that touch the outside world are run by the human.** `git`, domain setup, deploys — these get written into the session log as copy-pasteable blocks with one or two sentences explaining what they do.
+- **The AI writes files.** Whatever code or content lands in the repo, the AI wrote it. The diff (what git records as changed) IS the documentation of what changed.
+- **The human runs commands that touch the outside world.** `git`, domain setup, deploys — these land in the session log as copy-pasteable blocks with a sentence or two of plain-English explanation.
 
-That split is also the experience for a reader: prompts that produced files, plus commands you could run yourself, with no fog in between.
+That split is also the reading experience: prompts that produced files, plus commands you could run yourself, with no fog in between.
 
 ## Why document this way
 
-Most projects show you the finished thing. This one shows you the *making*: the prompts that produced each piece, the commands that were run, the dead ends. Read it the way you'd read someone else's notebook — not to copy it, but to see what the work actually looks like.
+Most projects show you the finished thing. This one shows you the *making*: the prompts that produced each piece, the commands that were run, the dead ends. Read it like someone else's notebook — not to copy, but to see what the work actually looks like.

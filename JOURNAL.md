@@ -52,3 +52,9 @@ Added a long-press (600ms) easter egg: hold anywhere on screen — finger or mou
 Added a subtle "Double-click for full screen" label in the bottom-left — desktop/mouse-only via `@media (hover: hover) and (pointer: fine)`, fades out after 7 seconds. On Windows/Linux it reads "Double-click · F11 for full screen" (Mac-aware UA sniff). On touch devices the same slot shows "Tap Share → Add to Home Screen" (iOS) or "Tap ⋮ → Add to Home Screen" (Android), suppressed if already running standalone. Wired up the PWA layer: `manifest.json` with `display: standalone`, generated `assets/icon-192.png` and `assets/icon-512.png` (deep purple rounded rect, hot-pink 6 / cyan 7), plus the full suite of Apple mobile web app meta tags and `apple-touch-icon`.
 
 → Full transcript: [sessions/007-fullscreen-hints-spa.md](./sessions/007-fullscreen-hints-spa.md)
+
+## 2026-04-30 — Session 008: README front door for new readers
+
+Reviewed the project through the eyes of a beginner who clicks the GitHub link with no prior context, named the vocabulary trap and the invisible scaffolding (Cowork Project, pre-existing accounts) that make the project look easier than it really is, and picked off a tight first-pass set of quick wins. Rewrote `README.md` for a curious 10+ reader: new welcoming lede pointing at `JOURNAL.md` as the entry point, a sentence calling out that the whole site was built in a single afternoon, a plain-English "what each file is" list (now including `manifest.json`, `LICENSE`, and `.gitignore`, with `KICKOFF.md` clearly labeled as "for the AI, not for you"), a new "Tools used" section that's honest about what costs money and what's optional, and inline parentheticals defining "repo," "push," and "diff" the first time each appears.
+
+→ Full transcript: [sessions/008-readme-front-door.md](./sessions/008-readme-front-door.md)
