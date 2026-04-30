@@ -10,6 +10,12 @@ A short, dated log of work sessions on like67.com. Each entry summarizes what ha
 
 ---
 
+## 2026-04-29 — Session 003: License, hosting, and DNS
+
+Added a CC BY-NC 4.0 license, picked Cloudflare Pages for hosting (free tier, CDN-distributed, auto-deploys on push), and got like67.com live. Also documented the git identity gotcha that surfaces on a fresh machine — worth capturing for anyone following along. DNS runs through Cloudflare; domain registration stays at Namecheap for now.
+
+→ Full transcript: [sessions/003-license-hosting-dns.md](./sessions/003-license-hosting-dns.md)
+
 ## 2026-04-29 — Session 002: Import the ChatGPT prototype
 
 Backfilled Session 000 with the actual ChatGPT conversation that produced the first HTML draft. The transcript was preserved twice: once as a styled HTML artifact (captured via the Claude in Chrome extension) and once as a prompt-and-action markdown file. Assembled the JSFiddle-ready HTML/CSS/JS blocks ChatGPT provided into a single `index.html` at the project root — the site now has a working first version.

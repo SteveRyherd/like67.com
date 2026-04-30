@@ -16,3 +16,4 @@ Each session captures:
 - [000 — ChatGPT HTML preview](./000-chatgpt-html-preview.md) — pre-Claude session; the original prototype (companion: [`000-chatgpt-html-preview.html`](./000-chatgpt-html-preview.html), the styled artifact)
 - [001 — Kickoff and strategy](./001-kickoff-and-strategy.md) — deciding how this project would be documented
 - [002 — Import the ChatGPT prototype](./002-import-chatgpt-prototype.md) — backfilling session 000 and committing the first `index.html`
+- [003 — License, hosting, and DNS](./003-license-hosting-dns.md) — CC BY-NC 4.0 license, Cloudflare Pages setup, like67.com goes live
