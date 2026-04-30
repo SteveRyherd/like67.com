@@ -43,6 +43,16 @@ Rewrote `README.md`:
 - Kept "How this is documented" but added a parenthetical explaining what "diff" means.
 - Left "Why document this way" unchanged.
 
+### 4. GitHub repo "About" sidebar
+
+> Before I send this, how do I add the description to the github page, you said that's a command? Otherwise, give me a great description, and I'll just login and set it.
+
+Surfaced two paths to set the description: paste in the web UI's About panel, or run `gh repo edit`. Suggested a kid-friendly description (*"For when someone says 'like 6... 7.' Built in one afternoon by talking to an AI — every prompt is in /sessions."*), the homepage URL, and four topic tags (`ai-built`, `vibe-coding`, `joke-site`, `single-page-app`).
+
+> Cool, I sent the commands, let's wrap up this session.
+
+User ran the `gh repo edit` command. The repo's About sidebar now carries the kid-friendly description, the like67.com homepage link, and the topic tags — visible to anyone landing on the GitHub page before they ever scroll to the README.
+
 ---
 
 ## Files touched
@@ -53,13 +63,24 @@ Rewrote `README.md`:
 
 ## Commands run
 
+Set the GitHub repo description, homepage, and topics. This is a one-time tweak to the repo metadata on GitHub itself — it doesn't touch any files and doesn't go through the `preview` → `main` workflow:
+
+```bash
+gh repo edit SteveRyherd/like67.com \
+  --description 'For when someone says "like 6... 7." Built in one afternoon by talking to an AI — every prompt is in /sessions.' \
+  --homepage 'https://like67.com' \
+  --add-topic ai-built,vibe-coding,joke-site,single-page-app
+```
+
+Commit and ship the README pass:
+
 ```bash
 # (run on the preview branch)
 git add -A
 git commit -m "Session 008: README front door for new readers"
 git push
-# check preview.like67-com.pages.dev (the README renders on GitHub, not the live site —
-# so really: check the README on github.com/SteveRyherd/like67.com on the preview branch)
+# the README renders on GitHub itself, not on the live site — so verify by viewing
+# the README on github.com/SteveRyherd/like67.com on the preview branch.
 git checkout main
 git merge preview
 git push
