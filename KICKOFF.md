@@ -45,7 +45,7 @@ Before doing anything else, read these files so you have full context:
 
 1. Fill in the session transcript: prompts verbatim in blockquotes, actions as terse summaries (what got done, not why).
 2. Add a `## Files touched` and a `## Commands run` section at the bottom.
-3. Add a one-paragraph entry to `JOURNAL.md` that links back to the new session file.
+3. Append a one-paragraph entry to the **bottom** of `JOURNAL.md` that links back to the new session file. The journal is chronological (oldest first) — always add to the end, never the top.
 4. Suggest the git commands the human should run — in this order:
    - Commit the session's changes on `preview` and push
    - Verify on `preview.like67-com.pages.dev` (the human does this step manually)

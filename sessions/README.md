@@ -19,3 +19,5 @@ Each session captures:
 - [003 — License, hosting, and DNS](./003-license-hosting-dns.md) — CC BY-NC 4.0 license, Cloudflare Pages setup, like67.com goes live
 - [004 — Title, mobile layout, GitHub link](./004-title-mobile-github.md) — better link-preview title, OG meta tags, iOS viewport fix, GitHub badge, status bar color
 - [005 — Docs update and site tweaks](./005-docs-and-tweaks.md) — live site and Cloudflare deployment docs, preview-branch workflow, mobile chant layout, landscape notch fix
+- [006 — Easter egg and text selection lock](./006-easter-egg-and-no-select.md) — 3-second lightning bolt hold reveals "Audrey Burns 🎉"; hardened user-select, tap highlight, touch callout, and context menu suppression
+- [007 — Fullscreen hints and PWA install](./007-fullscreen-hints-spa.md) — desktop double-click/F11 hint (bottom-left, mouse-only, auto-fades); mobile "Add to Home Screen" hint (iOS/Android, suppressed if standalone); web app manifest + icons
