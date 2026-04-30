@@ -10,6 +10,12 @@ A short, dated log of work sessions on like67.com. Each entry summarizes what ha
 
 ---
 
+## 2026-04-29 — Session 006: Easter egg and text selection lock
+
+Added a long-press (600ms) easter egg: hold anywhere on screen — finger or mouse — and "for Audrey Burns 🏀" pops up as a gradient pill banner for three seconds. Suppressed the iOS context menu so the long-press doesn't open a "Copy" sheet instead. Also hardened text-selection prevention: `-webkit-user-select: none` on `*`, plus `-webkit-tap-highlight-color` and `-webkit-touch-callout: none` on `body` to kill tap flash and the iOS callout balloon on all devices.
+
+→ Full transcript: [sessions/006-easter-egg-and-no-select.md](./sessions/006-easter-egg-and-no-select.md)
+
 ## 2026-04-29 — Session 005: Docs update and mobile chant layout
 
 Updated `README.md` and `KICKOFF.md` to reflect the live site at like67.com and the Cloudflare Pages deployment model (push to any branch, get an auto-preview URL; merge to main to ship). Baked the preview-branch workflow into the session instructions so it's the default going forward. On the site itself, split the "SIX SEVEN SIX SEVEN" chant into a responsive layout: widescreen keeps the single bottom row, mobile shows "SIX SEVEN" above and below the big numbers. Also fixed the white safe-area border that appeared in landscape on notched iPhones — `viewport-fit=cover` plus `html { background: #000 }`.

@@ -71,6 +71,12 @@ Updated `sessions/000-chatgpt-html-preview.md` to flag the JSFiddle-vs-canvas di
 - `JOURNAL.md` got a new dated entry for Session 002, linking to both the new transcript and the now-backfilled Session 000.
 - `sessions/README.md` now lists Session 002 and points at the styled HTML companion to Session 000.
 
+### 8. Licensing deferred
+
+> I've commited the files, next session we'll do licensing.
+
+User committed and pushed the session's work. Licensing (proposed CC BY-NC 4.0) is parked for the next session.
+
 ## Files touched
 
 - `sessions/000-chatgpt-html-preview.html` (created — copied from the user's upload)

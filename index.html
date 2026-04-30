@@ -22,7 +22,7 @@
       --purple: #7b2cff;
       --dark: #050013;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; user-select: none; -webkit-user-select: none; }
     html { background: #000; }
     body {
       margin: 0;
@@ -33,6 +33,9 @@
       font-family: Impact, Haettenschweiler, "Arial Black", sans-serif;
       color: white;
       user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
     }
     .stage {
       position: relative;
@@ -131,6 +134,8 @@
       color: var(--yellow);
       text-shadow: 0 0 30px var(--yellow), 5px 5px 0 var(--purple);
       animation: dashFlip .67s infinite linear;
+      padding: .15em;
+      cursor: default;
     }
     .chant {
       position: absolute;
@@ -270,6 +275,28 @@
       z-index: 8;
       pointer-events: none;
     }
+    .audrey {
+      position: absolute;
+      top: 7vh;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      padding: .25em .8em;
+      border: 5px solid white;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--purple), var(--hot), var(--cyan));
+      color: white;
+      font-size: clamp(18px, 4vw, 60px);
+      text-shadow: 2px 2px 0 rgba(0,0,0,.55);
+      box-shadow: 0 0 50px var(--hot), 0 0 100px var(--purple), inset 0 0 20px rgba(255,255,255,.2);
+      white-space: nowrap;
+      opacity: 0;
+      z-index: 35;
+      pointer-events: none;
+    }
+    .audrey.show {
+      opacity: 1;
+      animation: audreyPop 3s ease-out forwards;
+    }
     .gh-link {
       position: fixed;
       bottom: 14px;
@@ -360,6 +387,13 @@
       0%, 83%, 100% { opacity: 0; }
       67% { opacity: .28; }
     }
+    @keyframes audreyPop {
+      0%   { transform: translateX(-50%) rotate(-6deg) scale(.15); opacity: 0; }
+      10%  { transform: translateX(-50%) rotate(4deg)  scale(1.22); opacity: 1; }
+      20%  { transform: translateX(-50%) rotate(-2deg) scale(1); }
+      75%  { transform: translateX(-50%) rotate(-2deg) scale(1);   opacity: 1; }
+      100% { transform: translateX(-50%) rotate(6deg)  scale(.2);  opacity: 0; }
+    }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 2s !important; }
     }
@@ -372,9 +406,10 @@
     <div class="mini" id="miniRain"></div>
     <div class="rare-win" id="rareWin">I WIN!</div>
     <div class="hype" id="hypeText"></div>
+    <div class="audrey" id="audreyEgg">Audrey Burns 🎉</div>
     <main class="main" aria-label="Six Seven meme animation">
       <div class="num six" data-text="6">6</div>
-      <div class="dash">⚡</div>
+      <div class="dash" id="dashBtn">⚡</div>
       <div class="num seven" data-text="7">7</div>
     </main>
     <div class="chant chant-desktop">SIX&nbsp;&nbsp;SEVEN&nbsp;&nbsp;SIX&nbsp;&nbsp;SEVEN</div>
@@ -481,6 +516,25 @@
       else document.exitFullscreen();
     }
     document.addEventListener('dblclick', toggleFullScreen);
+
+    // Easter egg: hold the lightning bolt for 3 seconds
+    const audreyEgg = document.getElementById('audreyEgg');
+    const dashBtn = document.getElementById('dashBtn');
+    let pressTimer = null;
+    function triggerAudrey() {
+      audreyEgg.classList.remove('show');
+      void audreyEgg.offsetWidth;
+      audreyEgg.classList.add('show');
+      setTimeout(() => audreyEgg.classList.remove('show'), 3000);
+    }
+    function startPress(e) { e.stopPropagation(); pressTimer = setTimeout(triggerAudrey, 3000); }
+    function cancelPress() { clearTimeout(pressTimer); }
+    dashBtn.addEventListener('mousedown', startPress);
+    dashBtn.addEventListener('touchstart', startPress, { passive: false });
+    document.addEventListener('mouseup', cancelPress);
+    document.addEventListener('touchend', cancelPress);
+    document.addEventListener('touchmove', cancelPress, { passive: true });
+    document.addEventListener('contextmenu', e => e.preventDefault());
     makeRain();
     setInterval(() => {
       if (Math.random() > .55) boom();
