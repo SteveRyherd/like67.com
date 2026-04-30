@@ -45,6 +45,20 @@ Self-referential, reads as the joke, not accidentally cringey.
 
 **GitHub badge:** Small fixed icon in the bottom-right corner, low opacity at rest, lights up on hover. Stays out of the way visually but gives curious visitors a path to the source.
 
+### 4. Phone test + two more tweaks
+
+> The font for the "Six seven six seven" part seems small on mobile. Ideally I'd also like the top bar to be black, where the phone time is listed.
+
+Tested on iPhone via `preview.like67-com.pages.dev`. Two follow-up fixes:
+
+**Chant font:** The `clamp(16px, 4.2vw, 74px)` minimum was too conservative — visually small on mobile. Bumped to `clamp(22px, 5.5vw, 74px)`. Still fits on narrow screens but reads clearly at phone size.
+
+**Status bar color:** Added `<meta name="theme-color" content="#000000">`. On iOS Safari this tints the browser chrome (and status bar background) black, which matches the dark edge of the page rather than showing a jarring white strip.
+
+### 5. preview.like67.com cleanup
+
+Discovered that Cloudflare Pages auto-created `preview.like67.com` as a custom domain when the `preview` branch was pushed — but it pointed to production (main), not the preview branch. Custom domains in Cloudflare Pages always track the production deployment; there's no per-branch routing in the UI. Removed the misleading alias. The real staging URL is `preview.like67-com.pages.dev`, which Cloudflare generates automatically for every branch.
+
 ## Files touched
 
 - `index.html` (title, meta tags, dvh fix, GitHub badge)

@@ -12,7 +12,7 @@ A short, dated log of work sessions on like67.com. Each entry summarizes what ha
 
 ## 2026-04-29 — Session 004: Title, mobile layout, GitHub link
 
-Fixed the link-preview title (`6 7 Meme Chaos Animation` → `like 6… 7`), added Open Graph meta tags so iMessage and social previews render something intentional, fixed iOS Safari viewport clipping (the `100vh` bug that was cutting off the chant text and clipping the top of the color spiral) by layering `100dvh` over the existing fallbacks, scaled down the chant font minimum so it fits narrow screens, and added a small GitHub badge in the bottom-right corner. Also set up a `preview` branch wired to `preview.like67.com` on Cloudflare Pages for staging future changes before they hit production.
+Fixed the link-preview title (`6 7 Meme Chaos Animation` → `like 6… 7`), added Open Graph meta tags so iMessage and social previews render something intentional, fixed iOS Safari viewport clipping (the `100vh` bug that was cutting off the chant text and clipping the top of the color spiral) by layering `100dvh` over the existing fallbacks, tuned the chant font size for mobile, added `theme-color: black` for the iOS status bar, and added a small GitHub badge in the bottom-right corner. Also discovered that Cloudflare Pages custom domains always track production — removed the misleading `preview.like67.com` alias; staging lives at `preview.like67-com.pages.dev`.
 
 → Full transcript: [sessions/004-title-mobile-github.md](./sessions/004-title-mobile-github.md)
 
