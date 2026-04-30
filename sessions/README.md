@@ -18,3 +18,4 @@ Each session captures:
 - [002 — Import the ChatGPT prototype](./002-import-chatgpt-prototype.md) — backfilling session 000 and committing the first `index.html`
 - [003 — License, hosting, and DNS](./003-license-hosting-dns.md) — CC BY-NC 4.0 license, Cloudflare Pages setup, like67.com goes live
 - [004 — Title, mobile layout, GitHub link](./004-title-mobile-github.md) — better link-preview title, OG meta tags, iOS viewport fix, GitHub badge, status bar color
+- [005 — Docs update and site tweaks](./005-docs-and-tweaks.md) — live site and Cloudflare deployment docs, preview-branch workflow, mobile chant layout, landscape notch fix

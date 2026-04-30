@@ -10,6 +10,12 @@ A short, dated log of work sessions on like67.com. Each entry summarizes what ha
 
 ---
 
+## 2026-04-29 — Session 005: Docs update and mobile chant layout
+
+Updated `README.md` and `KICKOFF.md` to reflect the live site at like67.com and the Cloudflare Pages deployment model (push to any branch, get an auto-preview URL; merge to main to ship). Baked the preview-branch workflow into the session instructions so it's the default going forward. On the site itself, split the "SIX SEVEN SIX SEVEN" chant into a responsive layout: widescreen keeps the single bottom row, mobile shows "SIX SEVEN" above and below the big numbers. Also fixed the white safe-area border that appeared in landscape on notched iPhones — `viewport-fit=cover` plus `html { background: #000 }`.
+
+→ Full transcript: [sessions/005-docs-and-tweaks.md](./sessions/005-docs-and-tweaks.md)
+
 ## 2026-04-29 — Session 004: Title, mobile layout, GitHub link
 
 Fixed the link-preview title (`6 7 Meme Chaos Animation` → `like 6… 7`), added Open Graph meta tags so iMessage and social previews render something intentional, fixed iOS Safari viewport clipping (the `100vh` bug that was cutting off the chant text and clipping the top of the color spiral) by layering `100dvh` over the existing fallbacks, tuned the chant font size for mobile, added `theme-color: black` for the iOS status bar, and added a small GitHub badge in the bottom-right corner. Also discovered that Cloudflare Pages custom domains always track production — removed the misleading `preview.like67.com` alias; staging lives at `preview.like67-com.pages.dev`.
