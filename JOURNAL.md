@@ -10,6 +10,12 @@ A short, dated log of work sessions on like67.com. Each entry summarizes what ha
 
 ---
 
+## 2026-04-29 — Session 004: Title, mobile layout, GitHub link
+
+Fixed the link-preview title (`6 7 Meme Chaos Animation` → `like 6… 7`), added Open Graph meta tags so iMessage and social previews render something intentional, fixed iOS Safari viewport clipping (the `100vh` bug that was cutting off the chant text and clipping the top of the color spiral) by layering `100dvh` over the existing fallbacks, scaled down the chant font minimum so it fits narrow screens, and added a small GitHub badge in the bottom-right corner. Also set up a `preview` branch wired to `preview.like67.com` on Cloudflare Pages for staging future changes before they hit production.
+
+→ Full transcript: [sessions/004-title-mobile-github.md](./sessions/004-title-mobile-github.md)
+
 ## 2026-04-29 — Session 003: License, hosting, and DNS
 
 Added a CC BY-NC 4.0 license, picked Cloudflare Pages for hosting (free tier, CDN-distributed, auto-deploys on push), and got like67.com live. Also documented the git identity gotcha that surfaces on a fresh machine — worth capturing for anyone following along. DNS runs through Cloudflare; domain registration stays at Namecheap for now.
