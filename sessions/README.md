@@ -17,3 +17,4 @@ Each session captures:
 - [001 — Kickoff and strategy](./001-kickoff-and-strategy.md) — deciding how this project would be documented
 - [002 — Import the ChatGPT prototype](./002-import-chatgpt-prototype.md) — backfilling session 000 and committing the first `index.html`
 - [003 — License, hosting, and DNS](./003-license-hosting-dns.md) — CC BY-NC 4.0 license, Cloudflare Pages setup, like67.com goes live
+- [004 — Title, mobile layout, GitHub link](./004-title-mobile-github.md) — better link-preview title, OG meta tags, iOS viewport fix, GitHub badge, status bar color

@@ -145,6 +145,22 @@
       animation: chantShake .19s infinite, colorSwap .67s infinite steps(3, end);
       z-index: 10;
     }
+    .chant-mobile-top,
+    .chant-mobile-bottom { display: none; }
+
+    @media (max-width: 600px) {
+      .chant-desktop { display: none; }
+      .chant-mobile-top {
+        display: block;
+        top: 12vh;
+        bottom: auto;
+        font-size: clamp(22px, 8vw, 52px);
+      }
+      .chant-mobile-bottom {
+        display: block;
+        font-size: clamp(22px, 8vw, 52px);
+      }
+    }
     .rare-win {
       position: absolute;
       top: 7vh;
@@ -360,7 +376,9 @@
       <div class="dash">⚡</div>
       <div class="num seven" data-text="7">7</div>
     </main>
-    <div class="chant">SIX&nbsp;&nbsp;SEVEN&nbsp;&nbsp;SIX&nbsp;&nbsp;SEVEN</div>
+    <div class="chant chant-desktop">SIX&nbsp;&nbsp;SEVEN&nbsp;&nbsp;SIX&nbsp;&nbsp;SEVEN</div>
+    <div class="chant chant-mobile-top">SIX&nbsp;&nbsp;SEVEN</div>
+    <div class="chant chant-mobile-bottom">SIX&nbsp;&nbsp;SEVEN</div>
     <div class="flash"></div>
   </div>
   <a href="https://github.com/SteveRyherd/like67.com" class="gh-link" aria-label="View source on GitHub" target="_blank" rel="noopener noreferrer">
