@@ -64,8 +64,8 @@ Bumped resting `color` on `.corner-link`, `.fs-hint`, and `.home-hint` from `rgb
 
 ## Files touched
 
-- `assets/og-image.png` — new 1200×630 PNG, generated via Pillow.
-- `index.html` — OG/Twitter image meta tags added; `twitter:card` upgraded to `summary_large_image`; hint label opacity bumped to 0.5.
+- `assets/og-image.png` — new 1200×630 PNG (Pillow/numpy): radial gradient bg, coloured glow blobs, scanlines, glowing 6 ⚡ 7, headline, tagline, CTA pill. Revised mid-session after opengraph.xyz audit.
+- `index.html` — `og:image` / `og:image:width` / `og:image:height` added; `twitter:card` upgraded to `summary_large_image`; `twitter:image` added; `og:title` and `twitter:title` expanded to ~38 chars; `og:description` and `meta description` expanded to ~120 chars; hint label resting opacity bumped from 0.3 to 0.5.
 - `sessions/011-og-image-and-hint-polish.md` — this file.
 - `JOURNAL.md` — session 011 entry added.
 
@@ -73,10 +73,10 @@ Bumped resting `color` on `.corner-link`, `.fs-hint`, and `.home-hint` from `rgb
 
 ```bash
 git add -A
-git commit -m "Session 011: OG share image, summary_large_image card, hint opacity bump"
+git commit -m "Session 011: OG share image, expanded meta, hint opacity bump"
 git push
-# check preview.like67-com.pages.dev — paste the URL into opengraph.xyz or
-# iMessage yourself to verify the preview renders, then:
+# verify on preview.like67-com.pages.dev
+# paste URL into opengraph.xyz to confirm card renders cleanly, then:
 git checkout main
 git merge preview
 git push
