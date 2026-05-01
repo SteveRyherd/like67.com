@@ -70,3 +70,9 @@ Stepped back from building to review the project as a marketing/business advisor
 First Phase 1 build session. Replaced the bottom-right GitHub icon with text reading "How was this made? →", styled to match the existing fullscreen/home-screen hints — same `system-ui` font, same 11px size, same low resting opacity, same brighten-on-hover. All three bottom-corner labels now read as one typographic family, and the link points at the artifact's *story* rather than just its source code. On the analytics side, enabled Cloudflare Web Analytics for `like67.com` from the Cloudflare dashboard. Cloudflare auto-detected the Pages project and skipped the manual-snippet flow, so the beacon is auto-injected on every route — cookie-free, COPPA-safe, no code change to the repo. Documented the trade-off: the analytics tag isn't visible in `index.html`, which is a small loss for the educational-artifact angle but easy to revisit later by flipping the Web Analytics site setting to manual.
 
 → Full transcript: [sessions/010-analytics-and-corner-link.md](./sessions/010-analytics-and-corner-link.md)
+
+## 2026-04-30 — Session 011: OG image and hint polish
+
+Created a real 1200×630 OG share image (`assets/og-image.png`) — dark radial gradient, coloured glow blobs at the corners, scanlines, glowing "6 ⚡ 7" numbers in Impact-style type, and a `like67.com` watermark. Generated via a Pillow/numpy script. Wired it into `index.html` with proper `og:image` tags and upgraded `twitter:card` to `summary_large_image` so X/Twitter and Discord show the big-preview format. Also bumped the resting opacity on all three corner labels ("How was this made? →", the fullscreen hint, the home-screen hint) from 0.3 to 0.5 — still subtle, actually readable.
+
+→ Full transcript: [sessions/011-og-image-and-hint-polish.md](./sessions/011-og-image-and-hint-polish.md)
