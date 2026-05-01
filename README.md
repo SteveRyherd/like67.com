@@ -1,24 +1,27 @@
 # like67.com
 
-The site is a joke. The rest of this folder is the *story* of how it got made — every prompt, every change, kept in the open.
+**[Start with the story →](./STORY.md)**
 
-**Why this exists:** [`STORY.md`](./STORY.md) — the origin. Start here if you're new.
-**How it was built:** [`JOURNAL.md`](./JOURNAL.md) — the session log. Read top to bottom for the arc.
+The site is a joke — a brainrot page for the moment when someone says "like 6... 7." The *repo* (this folder on GitHub) is the story of how it was made: every prompt, every change, kept in the open.
 
-**The site is live at [like67.com](https://like67.com).** When someone says "like 6... 7," you pull up the page.
+**Why this exists:** [`STORY.md`](./STORY.md)
+**How it was built, session by session:** [`JOURNAL.md`](./JOURNAL.md)
 
-The whole site — code, domain, hosting, every feature — was built across seven sessions on a single afternoon (April 29, 2026). The code was written entirely by an AI; the human did the prompting and ran the commands that touch the outside world (git, hosting, the domain).
+**The site is live at [like67.com](https://like67.com).** The whole thing — code, domain, hosting, every feature — was built in a single afternoon (April 29, 2026). The code was written entirely by an AI; the human did the prompting and ran the commands that touch the outside world.
+
+> **The mission:** AI can be a tool that helps kids and the general public level the playing field with their ideas. This site is the demo. The repo is the proof.
 
 ## What each file is
 
+- `STORY.md` — **start here.** The first-person origin essay: why this exists, in plain English.
+- `JOURNAL.md` — a dated log of every work session, with links to the full transcripts. Read this top to bottom for the arc.
+- `ROADMAP.md` — what comes next: three phases from foundation to tutorial to amplification.
 - `index.html` — the actual website. Open it in a browser and you've got the whole site.
-- `STORY.md` — the origin essay. Why this exists, in plain English.
+- `sessions/` — the raw conversations with the AI, one file per session. This is where the actual making lives.
 - `assets/` — pictures and icons used by the page.
 - `manifest.json` — tells phones how to save the site as an app.
-- `JOURNAL.md` — a dated log of every work session, with links to the full transcripts. Read this top to bottom for the story arc.
-- `sessions/` — the raw conversations with the AI, one file per session. This is where the actual making lives.
 - `LICENSE` — the legal note (CC BY-NC 4.0 — fine to learn from, not for commercial use).
-- `KICKOFF.md` — a paste-ready prompt for AI assistants. Skip this one; it's for the AI, not for you.
+- `KICKOFF.md` — a paste-ready prompt for AI assistants. For the AI, not for you.
 - `.gitignore` — bookkeeping; tells git which files to ignore.
 
 ## Tools used
@@ -30,7 +33,7 @@ The whole site — code, domain, hosting, every feature — was built across sev
 
 ## How it gets to the internet
 
-Cloudflare Pages watches this GitHub repo (the folder GitHub stores) and rebuilds the site every time anyone pushes (uploads a change).
+Cloudflare Pages watches this GitHub repo and rebuilds the site every time anyone pushes (uploads a change).
 
 - `main` branch → **production** at [like67.com](https://like67.com)
 - Any other branch → an auto-generated preview URL at `[branch-name].like67-com.pages.dev`
@@ -47,7 +50,3 @@ Two rules keep the record clean:
 - **The human runs commands that touch the outside world.** `git`, domain setup, deploys — these land in the session log as copy-pasteable blocks with a sentence or two of plain-English explanation.
 
 That split is also the reading experience: prompts that produced files, plus commands you could run yourself, with no fog in between.
-
-## Why document this way
-
-Most projects show you the finished thing. This one shows you the *making*: the prompts that produced each piece, the commands that were run, the dead ends. Read it like someone else's notebook — not to copy, but to see what the work actually looks like.

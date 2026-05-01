@@ -82,3 +82,9 @@ Created a real 1200×630 OG share image (`assets/og-image.png`) generated via a 
 Wrote `STORY.md` — the first-person origin essay that answers "why does this exist." Drawn from source memories: editing the MSN homepage at age 9-10 on a friend's dad's computer (right-click save, didn't know if they were changing it for everyone), Geocities and the Yahoo directory era before Google, GameFAQs and user #1694 "Steve" (Jeff's one-person internet that mattered to everyone who played games), Million Dollar Homepage as a mark on the world. The pivot section ("Then the internet got big. Then it got smooth. Then it got owned.") sets up the AI reveal: like67.com, built in an afternoon, no code written. Closes with the thesis: the craziness is back. Also wired `STORY.md` as the README's first "start here" link, with full restructure deferred to session 013.
 
 → Full transcript: [sessions/012-the-placard.md](./sessions/012-the-placard.md)
+
+## 2026-04-30 — Session 013: README restructure
+
+Restructured `README.md` to make `STORY.md` the front door. The new opening line is a direct "Start with the story →" link. The mission statement — *AI can be a tool that helps kids and the general public level the playing field with their ideas* — is now pinned as a blockquote near the top. The file list was reordered (story docs first, then site files) and `ROADMAP.md` was added (it was missing). The redundant "Why document this way" closing section was trimmed. Also completed the `sessions/README.md` index, which was missing entries for sessions 008–013.
+
+→ Full transcript: [sessions/013-readme-restructure.md](./sessions/013-readme-restructure.md)
