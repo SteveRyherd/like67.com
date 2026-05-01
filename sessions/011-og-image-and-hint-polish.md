@@ -45,6 +45,21 @@ Updated `index.html`:
 
 Bumped resting `color` on `.corner-link`, `.fs-hint`, and `.home-hint` from `rgba(255,255,255,0.3)` to `rgba(255,255,255,0.5)`. Hover on `.corner-link` stays at `0.85`. The labels are now legible at a glance without dominating the animation.
 
+### 5. OG image and meta revision (after opengraph.xyz check)
+
+> [opengraph.xyz feedback] The OG Image URL appears to be invalid or unreachable · Missing a clear headline in your image · Missing a call-to-action in your image · Title is short (9 characters) · Description is short (45 chars)
+
+**URL error** — expected: the image lives at `like67.com/assets/og-image.png` but hadn't been merged to `main` yet. Not a code bug; merge and it resolves.
+
+**Title and description** — expanded both to hit recommended ranges:
+- `og:title` / `twitter:title`: `like 6… 7 · you know why you're here` (~38 chars, punchy)
+- `og:description` / `meta description`: `The six seven page. When someone says 'like 6... 7' — this is the page you pull up. You know exactly why you're here.` (~120 chars)
+
+**Image — headline and CTA** — regenerated `og-image.png` with three new text layers:
+- **Top headline**: `like 6… 7` in 46pt bold with yellow glow — gives scrapers a readable site name.
+- **Tagline**: `you know why you're here.` in italic below the numbers, 34pt, 67% opacity.
+- **CTA pill**: `like67.com` in a rounded dark pill with a white border at the bottom centre — satisfies the call-to-action check and is clearly the destination URL.
+
 ---
 
 ## Files touched
