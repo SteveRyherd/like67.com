@@ -76,3 +76,9 @@ First Phase 1 build session. Replaced the bottom-right GitHub icon with text rea
 Created a real 1200×630 OG share image (`assets/og-image.png`) generated via a Pillow/numpy script: dark radial gradient, coloured glow blobs at the corners, scanlines, glowing "6 ⚡ 7" numbers, a "like 6… 7" headline at the top, "you know why you're here." tagline, and a `like67.com` pill-button CTA at the bottom. Wired into `index.html` with `og:image` tags and `twitter:card: summary_large_image`. Ran the result through opengraph.xyz mid-session; revised the image to add the headline and CTA, and expanded `og:title` (~38 chars) and `og:description` (~120 chars) to hit recommended lengths. Also bumped the resting opacity on all three corner labels ("How was this made? →", fullscreen hint, home-screen hint) from 0.3 to 0.5 — still subtle, actually readable.
 
 → Full transcript: [sessions/011-og-image-and-hint-polish.md](./sessions/011-og-image-and-hint-polish.md)
+
+## 2026-04-30 — Session 012: The placard
+
+Wrote `STORY.md` — the first-person origin essay that answers "why does this exist." Drawn from source memories: editing the MSN homepage at age 9-10 on a friend's dad's computer (right-click save, didn't know if they were changing it for everyone), Geocities and the Yahoo directory era before Google, GameFAQs and user #1694 "Steve" (Jeff's one-person internet that mattered to everyone who played games), Million Dollar Homepage as a mark on the world. The pivot section ("Then the internet got big. Then it got smooth. Then it got owned.") sets up the AI reveal: like67.com, built in an afternoon, no code written. Closes with the thesis: the craziness is back. Also wired `STORY.md` as the README's first "start here" link, with full restructure deferred to session 013.
+
+→ Full transcript: [sessions/012-the-placard.md](./sessions/012-the-placard.md)

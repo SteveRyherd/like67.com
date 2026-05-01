@@ -1,6 +1,9 @@
 # like67.com
 
-The site is a joke. The rest of this folder is the *story* of how it got made — every prompt, every change, kept in the open. Want to see how? Start with [`JOURNAL.md`](./JOURNAL.md) and read top to bottom.
+The site is a joke. The rest of this folder is the *story* of how it got made — every prompt, every change, kept in the open.
+
+**Why this exists:** [`STORY.md`](./STORY.md) — the origin. Start here if you're new.
+**How it was built:** [`JOURNAL.md`](./JOURNAL.md) — the session log. Read top to bottom for the arc.
 
 **The site is live at [like67.com](https://like67.com).** When someone says "like 6... 7," you pull up the page.
 
@@ -9,6 +12,7 @@ The whole site — code, domain, hosting, every feature — was built across sev
 ## What each file is
 
 - `index.html` — the actual website. Open it in a browser and you've got the whole site.
+- `STORY.md` — the origin essay. Why this exists, in plain English.
 - `assets/` — pictures and icons used by the page.
 - `manifest.json` — tells phones how to save the site as an app.
 - `JOURNAL.md` — a dated log of every work session, with links to the full transcripts. Read this top to bottom for the story arc.
