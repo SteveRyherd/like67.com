@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How this was made (in 6-7 hours) — like67.com</title>
+<meta name="description" content="A walkthrough of how like67.com got built — by talking to an AI, in a single afternoon. No code written by hand. Two columns: one for total beginners, one for replicating it.">
+<meta name="theme-color" content="#1a1a18">
+
+<meta property="og:title" content="How this was made (in 6-7 hours)">
+<meta property="og:description" content="like67.com, built in an afternoon by talking to an AI. The full walkthrough — from idea to live, in plain English and in detail.">
+<meta property="og:image" content="https://like67.com/assets/og-image.png">
+<meta property="og:url" content="https://like67.com/how-this-was-made-in-6-7-hours">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root {
+    --bg: #F5EFE2;
+    --bg-warm: #EFE8D6;
+    --bg-card: #ECE5D2;
+    --ink: #1A1A18;
+    --ink-soft: #4A4A45;
+    --ink-muted: #76746C;
+    --rule: #D9D2BE;
+    --rule-strong: #C7BFA9;
+    --link: #B3306B;
+    --pink-bg: #FBE4ED;
+    --pink-ink: #8B1F4F;
+    --pink-rule: #F2BCD2;
+    --cyan-bg: #DCEEF1;
+    --cyan-ink: #195C68;
+    --amber-bg: #F7EBC8;
+    --amber-ink: #6E520B;
+    --code-bg: #E5DEC9;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Charter", Georgia, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); text-decoration: none; border-bottom: 1px solid currentColor; }
+  a:hover { color: var(--ink); }
+  abbr[title] {
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--rule-strong);
+    cursor: help;
+  }
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* ── top bar ─────────────────────────────────────────── */
+  header.topbar {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 10px 20px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header.topbar a { color: var(--bg); border-bottom-color: rgba(255,255,255,0.3); }
+  header.topbar a:hover { color: #fff; border-bottom-color: #fff; }
+  header.topbar .brand { font-weight: 500; letter-spacing: 0.04em; }
+  header.topbar .brand .accent { color: #FF4FA2; }
+
+  /* ── layout ──────────────────────────────────────────── */
+  .layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 40px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 32px 80px;
+  }
+  aside.toc {
+    position: sticky;
+    top: 56px;
+    align-self: start;
+    height: calc(100vh - 76px);
+    overflow-y: auto;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.5;
+    padding-right: 8px;
+  }
+  aside.toc h2 {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  aside.toc ol {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    counter-reset: step;
+  }
+  aside.toc ol li {
+    counter-increment: step;
+    margin: 0;
+    border-left: 2px solid transparent;
+  }
+  aside.toc ol li a {
+    display: block;
+    padding: 6px 10px;
+    color: var(--ink-soft);
+    border-bottom: none;
+    position: relative;
+  }
+  aside.toc ol li a::before {
+    content: "§" counter(step);
+    color: var(--ink-muted);
+    margin-right: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  aside.toc ol li a:hover { color: var(--ink); background: var(--bg-warm); }
+  aside.toc ol li.active { border-left-color: var(--link); }
+  aside.toc ol li.active a { color: var(--ink); font-weight: 500; }
+  aside.toc ol li.active a::before { color: var(--link); }
+
+  aside.toc .by-topic { margin-top: 16px; }
+  aside.toc .by-topic ul { list-style: none; padding: 0; margin: 0; }
+  aside.toc .by-topic li { margin: 0; }
+  aside.toc .by-topic li a {
+    display: block;
+    padding: 4px 10px;
+    color: var(--ink-soft);
+    border-bottom: none;
+    font-size: 12.5px;
+  }
+  aside.toc .by-topic li a:hover { color: var(--ink); background: var(--bg-warm); }
+  aside.toc .by-topic li a .arrow { color: var(--ink-muted); float: right; }
+
+  aside.toc .footer-link {
+    margin-top: 28px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-muted);
+    font-size: 12px;
+  }
+  aside.toc .footer-link a { color: var(--ink-muted); border-bottom-color: var(--rule); }
+
+  /* ── main column ─────────────────────────────────────── */
+  main { max-width: 780px; }
+
+  .page-intro {
+    margin-bottom: 56px;
+  }
+  .page-intro h1 {
+    font-family: var(--font-sans);
+    font-size: 34px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .page-intro .deck {
+    font-family: var(--font-sans);
+    color: var(--ink-muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
+  }
+  .page-intro p { margin: 0 0 14px; }
+  .page-intro p.lead { font-size: 19px; }
+
+  /* ── section ────────────────────────────────────────── */
+  section.entry {
+    border-top: 1px solid var(--rule);
+    padding-top: 36px;
+    margin-top: 48px;
+    scroll-margin-top: 60px;
+  }
+  section.entry h2 {
+    font-family: var(--font-sans);
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  section.entry h2 .num {
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+    margin-right: 10px;
+    font-weight: 400;
+  }
+  section.entry .source {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+  }
+  section.entry .stub-note {
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    color: var(--ink-muted);
+    background: var(--bg-warm);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0 0;
+  }
+  section.entry h3.subsection {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 40px 0 14px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    text-align: left;
+  }
+  section.entry h3.subsection:first-of-type { margin-top: 8px; }
+  section.entry .subsection-body {
+    font-family: var(--font-sans);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  section.entry .subsection-body.em-dash {
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  /* ── raw-transcript callout ─────────────────────────── */
+  .raw-callout {
+    background: var(--bg-card);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 0 0 28px;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+  }
+  .raw-callout a {
+    color: var(--link);
+    font-weight: 500;
+  }
+  .raw-callout .sub {
+    color: var(--ink-muted);
+    font-size: 12.5px;
+    margin-top: 3px;
+  }
+
+  /* ── two-column header strip ────────────────────────── */
+  .col-headers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule-strong);
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .col-headers .left { color: var(--pink-ink); }
+  .col-headers .right { color: var(--cyan-ink); }
+
+  /* ── narrative rows ─────────────────────────────────── */
+  .row {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .row .label {
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 10px;
+    font-weight: 500;
+    text-align: center;
+  }
+  .row .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .row .cell { font-size: 16.5px; line-height: 1.65; }
+  .row .cell p { margin: 0 0 10px; }
+  .row .cell p:last-child { margin-bottom: 0; }
+  .row .cell.verbatim {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    background: var(--bg-card);
+    padding: 10px 14px;
+    border-radius: 4px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ── concepts (accordion) ───────────────────────────── */
+  .concepts .hint {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    margin-bottom: 10px;
+  }
+  .concepts details {
+    display: inline-block;
+    margin: 3px 6px 3px 0;
+    vertical-align: top;
+  }
+  .concepts details summary {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--code-bg);
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink);
+  }
+  .concepts details summary::-webkit-details-marker { display: none; }
+  .concepts details[open] {
+    display: block;
+    margin: 8px 0 12px;
+  }
+  .concepts details[open] summary {
+    background: var(--pink-bg);
+    color: var(--pink-ink);
+    border-color: var(--pink-rule);
+  }
+  .concepts details .body {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    padding: 12px 16px;
+    margin-top: 8px;
+    background: var(--pink-bg);
+    color: var(--pink-ink);
+    border-radius: 6px;
+    line-height: 1.55;
+  }
+  .concepts details .body p { margin: 0 0 8px; }
+  .concepts details .body p:last-child { margin: 0; }
+  .concepts details .body code { background: rgba(139,31,79,0.10); }
+
+  /* ── questions block (full width) ───────────────────── */
+  .questions {
+    background: var(--pink-bg);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 0 0 14px;
+    font-family: var(--font-sans);
+  }
+  .questions .q-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 8px 18px;
+    font-size: 14.5px;
+    color: var(--pink-ink);
+    margin-bottom: 8px;
+  }
+  .questions .q-row:last-child { margin-bottom: 0; }
+  .questions .q-row .who { font-weight: 500; }
+  .questions .q-row .what { font-style: italic; }
+  .questions .q-row .what.plain { font-style: normal; }
+  .questions .q-row .what li { margin: 0 0 4px; list-style: none; }
+  .questions .q-row .what ul { padding: 0; margin: 0; }
+  .questions a { color: var(--pink-ink); border-bottom-color: rgba(139,31,79,0.3); }
+
+  /* ── going-deeper block ─────────────────────────────── */
+  .deeper {
+    background: var(--bg-card);
+    border-radius: 8px;
+    padding: 16px 22px;
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+  }
+  .deeper a { color: var(--link); }
+  .deeper .item { margin: 4px 0; }
+
+  /* ── footer ─────────────────────────────────────────── */
+  footer.page-foot {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+  footer.page-foot a { color: var(--ink-muted); border-bottom-color: var(--rule); }
+
+  /* ── narrow / mobile ────────────────────────────────── */
+  .mobile-toc { display: none; }
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; padding: 20px 18px 60px; gap: 20px; }
+    aside.toc { display: none; }
+    .mobile-toc {
+      display: block;
+      font-family: var(--font-sans);
+      background: var(--bg-warm);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+    .mobile-toc summary { cursor: pointer; font-weight: 500; }
+    .mobile-toc ol { margin: 8px 0 0; padding-left: 24px; }
+    .mobile-toc li { margin: 3px 0; }
+    .mobile-toc a { color: var(--ink); border-bottom: none; }
+    main { max-width: none; }
+    .page-intro h1 { font-size: 28px; }
+    .row .pair { grid-template-columns: 1fr; gap: 14px; }
+    .col-headers { grid-template-columns: 1fr 1fr; font-size: 10.5px; }
+    .questions .q-row { grid-template-columns: 1fr; gap: 2px 0; }
+    .questions .q-row .who { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="brand">like <span class="accent">6&hellip;7</span> &nbsp;/&nbsp; how this was made (in 6&ndash;7 hours)</span>
+  <a href="https://like67.com">&larr; back to the site</a>
+</header>
+
+<div class="layout">
+
+  <aside class="toc" aria-label="Table of contents">
+    <h2>The story</h2>
+    <ol>
+      <li><a href="#s1">The idea</a></li>
+      <li><a href="#s2">Saving the work</a></li>
+      <li><a href="#s3">On the internet</a></li>
+      <li><a href="#s4">Looking right on phones</a></li>
+      <li><a href="#s5">Save it as an app</a></li>
+      <li><a href="#s6">Knowing if anyone's there</a></li>
+      <li><a href="#s7">A real share image</a></li>
+    </ol>
+
+    <div class="by-topic">
+      <h2>By topic</h2>
+      <ul>
+        <li><a href="#s2">Repos &amp; Git <span class="arrow">&rarr;</span></a></li>
+        <li><a href="#s3">Domains &amp; <abbr title="Domain Name System">DNS</abbr> <span class="arrow">&rarr;</span></a></li>
+        <li><a href="#s3">Hosting <span class="arrow">&rarr;</span></a></li>
+        <li><a href="#s4">Mobile fixes <span class="arrow">&rarr;</span></a></li>
+        <li><a href="#s5">Apps &amp; <abbr title="Progressive Web App">PWA</abbr> <span class="arrow">&rarr;</span></a></li>
+        <li><a href="#s6">Analytics <span class="arrow">&rarr;</span></a></li>
+        <li><a href="#s7">Sharing &amp; <abbr title="Open Graph">OG</abbr> <span class="arrow">&rarr;</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-link">
+      <a href="https://github.com/SteveRyherd/like67.com">repo on GitHub &rarr;</a><br>
+      <a href="https://github.com/SteveRyherd/like67.com/blob/main/JOURNAL.md">raw build journal &rarr;</a>
+    </div>
+  </aside>
+
+  <main>
+
+    <details class="mobile-toc">
+      <summary>Jump to a section</summary>
+      <ol>
+        <li><a href="#s1">The idea</a></li>
+        <li><a href="#s2">Saving the work</a></li>
+        <li><a href="#s3">On the internet</a></li>
+        <li><a href="#s4">Looking right on phones</a></li>
+        <li><a href="#s5">Save it as an app</a></li>
+        <li><a href="#s6">Knowing if anyone's there</a></li>
+        <li><a href="#s7">A real share image</a></li>
+      </ol>
+    </details>
+
+    <div class="page-intro">
+      <h1>How this was made (in 6&ndash;7 hours)</h1>
+      <div class="deck">A walkthrough of like67.com &mdash; built in an afternoon by talking to an <abbr title="Artificial Intelligence">AI</abbr>.</div>
+
+      <p class="lead">This site is a joke. A page for the moment when somebody says <em>like 6&hellip; 7</em>. The whole thing &mdash; the <abbr title="HyperText Markup Language">HTML</abbr>, the animations, the icons, the share image, the install prompt for your phone &mdash; was built in one afternoon by typing into a chat with an <abbr title="Artificial Intelligence">AI</abbr>. I didn't write any code by hand. Even this tutorial and recap was generated without typing any code.</p>
+
+      <p>Below is the story of how it actually happened, in the order it happened, broken into seven pieces.</p>
+
+      <p>Each piece has two columns. <strong>The left column is for someone who is just curious in seeing the pieces of what I did, in plain English.</strong> <strong>The right column is for someone who wants to learn a little more technical language (jargon) with the goal of being detailed enough to copy the whole thing</strong> &mdash; the specific tools, the prompts I used word-for-word, the commands I ran. You don't need to read both.</p>
+
+      <p>Anything underlined with little dots, like <abbr title="HyperText Markup Language">HTML</abbr>, is an acronym &mdash; hover (or tap) to see what it stands for.</p>
+    </div>
+
+    <!-- ───────── §1 ───────── -->
+    <section class="entry" id="s1">
+      <h2><span class="num">§1</span>The idea</h2>
+      <div class="source">From session 000 &mdash; the ChatGPT prototype</div>
+
+      <div class="raw-callout">
+        <a href="https://github.com/SteveRyherd/like67.com/blob/main/sessions/000-chatgpt-html-preview.md">View the raw conversation that produced this &rarr;</a>
+        <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
+      </div>
+
+      <h3 class="subsection">How it went</h3>
+
+      <div class="col-headers">
+        <div class="left">In plain English</div>
+        <div class="right">To replicate it</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Where I was</div>
+        <div class="pair">
+          <div class="cell"><p>Nothing existed yet. Just an idea for a stupid webpage about a meme. I wanted a single page that <em>felt</em> like the moment somebody says <em>like 6&hellip; 7</em>.</p></div>
+          <div class="cell"><p>No code, no website, nothing yet. Just an idea and a closed laptop.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I wanted</div>
+        <div class="pair">
+          <div class="cell"><p>One web page that, when you opened it, felt like the meme. Big glowing &ldquo;6 7&rdquo; numbers in the middle. Confetti. Color. Noise. Nothing useful. Just chaos pointed at a single moment.</p></div>
+          <div class="cell"><p>A self-contained <code>index.html</code> &mdash; markup, styles, and scripts all in one file. No assembly step before it could run (a &ldquo;build step&rdquo;), and no extra library like React to install first (a &ldquo;framework&rdquo;). Something I could double-click on my own machine and have the whole site running locally before anything else got involved.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I already knew (that might be new to you)</div>
+        <div class="pair">
+          <div class="cell">
+            <p>There's a pile of background knowledge baked into even the first sentence I typed. I knew that webpages are made of code called HyperText Markup Language (<abbr title="HyperText Markup Language">HTML</abbr>). I knew that the code lives in a <em>file</em> you can save and open. I knew an <abbr title="Artificial Intelligence">AI</abbr> chat could write that code, not just talk about it.</p>
+            <p>None of those are obvious if no one has ever told you. The whole tutorial below is paced to a reader who is finding out about each of them as they appear.</p>
+          </div>
+          <div class="cell">
+            <p><abbr title="HyperText Markup Language">HTML</abbr> / <abbr title="Cascading Style Sheets">CSS</abbr> / <abbr title="JavaScript">JS</abbr> basics. That JSFiddle exists as a place to paste-and-run. That <abbr title="Large Language Model">LLM</abbr>s iterate well in conversation &mdash; they get better when you say what's wrong. That plain-English prompts work; you don't have to &ldquo;write code&rdquo; to ask for code.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I asked</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I told the <abbr title="Artificial Intelligence">AI</abbr>: make me a crazy 6&ndash;7 animation webpage. Big numbers, vibrant, more chaos than makes sense. Then I tried what it built, said what was off, and asked for fixes. Over and over. Each round was just a few words.</p>
+          </div>
+          <div class="cell verbatim">
+            &gt; Can you do custom html animations?<br>
+            &gt; I want a 6 7 animation. Something big, vibrant and crazy. Reflecting the meme.<br>
+            &gt; That's pretty good, can we add anything else to the chaos?<br>
+            &gt; Make all the hypeText, rare. Let's get rid of the More Chaos button.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What got built</div>
+        <div class="pair">
+          <div class="cell">
+            <p>A working webpage. Big numbers in the middle, glowing colors behind them, raining emojis, hype text that flashes once in a while. I could see it run on the screen, try it, and ask for changes. By the end of the conversation, the page was the page.</p>
+          </div>
+          <div class="cell">
+            <p>One <abbr title="HyperText Markup Language">HTML</abbr> file (~200 lines) with embedded <code>&lt;style&gt;</code> and <code>&lt;script&gt;</code>. About ten prompts of iteration. Previewed live in JSFiddle, then the final result was saved as a local file. The first <code>git commit</code> doesn't happen until <a href="#s2">&sect;2</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Concepts introduced in this section</h3>
+      <div class="concepts">
+        <div class="hint">Click any concept for a definition and an example.</div>
+        <details>
+          <summary>HTML</summary>
+          <div class="body">
+            <p><strong>HyperText Markup Language.</strong> The code that tells a browser what's <em>on</em> a webpage &mdash; headings, paragraphs, images, buttons. It's just text in a file, with little tags wrapped around the parts.</p>
+            <p>Example: <code>&lt;h1&gt;Hello&lt;/h1&gt;</code> makes the word <em>Hello</em> show up as a big heading.</p>
+          </div>
+        </details>
+        <details>
+          <summary>CSS</summary>
+          <div class="body">
+            <p><strong>Cascading Style Sheets.</strong> The code that tells the browser how the page should <em>look</em> &mdash; colors, sizes, fonts, animations.</p>
+            <p>Example: <code>h1 { color: hotpink; }</code> turns every <code>&lt;h1&gt;</code> heading hot pink.</p>
+          </div>
+        </details>
+        <details>
+          <summary>JavaScript</summary>
+          <div class="body">
+            <p>The code that lets a webpage <em>do</em> things &mdash; react to clicks, change over time, run animations, respond to the user.</p>
+            <p>Example: a button that, when clicked, makes confetti fall down the screen.</p>
+          </div>
+        </details>
+        <details>
+          <summary>prompt</summary>
+          <div class="body">
+            <p>What you type to an <abbr title="Artificial Intelligence">AI</abbr>. The clearer and more specific you are, the better the answer. You can iterate &mdash; say what's wrong, ask for a change, get a new version.</p>
+            <p>Example: &ldquo;Make the numbers bigger and add more emojis.&rdquo;</p>
+          </div>
+        </details>
+        <details>
+          <summary>iteration loop</summary>
+          <div class="body">
+            <p>The cycle of: ask for something &rarr; see what came back &rarr; say what's wrong or what you want next &rarr; repeat. Most of building with <abbr title="Artificial Intelligence">AI</abbr> is iteration, not one giant prompt.</p>
+          </div>
+        </details>
+        <details>
+          <summary>JSFiddle</summary>
+          <div class="body">
+            <p>A free website where you can paste <abbr title="HyperText Markup Language">HTML</abbr>, <abbr title="Cascading Style Sheets">CSS</abbr>, and <abbr title="JavaScript">JS</abbr> into three boxes and see your webpage run live in a fourth. Useful for testing before you save anything to a file.</p>
+            <p>It lives at <a href="https://jsfiddle.net">jsfiddle.net</a>.</p>
+          </div>
+        </details>
+      </div>
+
+      <h3 class="subsection">Tools I used</h3>
+      <p class="subsection-body">
+        <a href="https://chat.openai.com">ChatGPT</a> for generation &middot;
+        <a href="https://jsfiddle.net">JSFiddle</a> for live preview &middot;
+        any plain text editor (TextEdit, Notepad, VS Code) for saving the file.
+      </p>
+
+      <h3 class="subsection">Commands I ran</h3>
+      <p class="subsection-body em-dash">
+        None this section &mdash; entirely chat &amp; copy-paste. The terminal first appears in <a href="#s2">&sect;2</a>.
+      </p>
+
+      <h3 class="subsection">Questions to try</h3>
+      <div class="questions">
+        <div class="q-row">
+          <div class="who">Ask your <abbr title="Artificial Intelligence">AI</abbr></div>
+          <div class="what">
+            <ul>
+              <li>&ldquo;What's the dumbest possible webpage I could make about [a thing I love]?&rdquo;</li>
+              <li>&ldquo;Make me a single <abbr title="HyperText Markup Language">HTML</abbr> file that animates the words [my idea] in a fun way.&rdquo;</li>
+              <li>&ldquo;I'm a total beginner &mdash; what is <abbr title="HyperText Markup Language">HTML</abbr>, in plain English?&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="q-row">
+          <div class="who">Search</div>
+          <div class="what plain">what is HTML &middot; what is JSFiddle &middot; getting started with <abbr title="HyperText Markup Language">HTML</abbr> on <abbr title="Mozilla Developer Network">MDN</abbr></div>
+        </div>
+        <div class="q-row">
+          <div class="who">Ask yourself</div>
+          <div class="what">What's a meme or a moment I'd actually want a page for? Can I describe it to an <abbr title="Artificial Intelligence">AI</abbr> in one sentence?</div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Going deeper</h3>
+      <div class="deeper">
+        <div class="item">&rarr; <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML"><abbr title="Mozilla Developer Network">MDN</abbr>: Getting started with <abbr title="HyperText Markup Language">HTML</abbr></a></div>
+        <div class="item">&rarr; <a href="https://jsfiddle.net">JSFiddle.net</a> &mdash; open it in a tab and play</div>
+      </div>
+    </section>
+
+    <!-- ───────── §2 stub ───────── -->
+    <section class="entry" id="s2">
+      <h2><span class="num">§2</span>Saving the work</h2>
+      <div class="source">From session 002 &mdash; importing the prototype into a repo</div>
+
+      <div class="raw-callout">
+        <a href="https://github.com/SteveRyherd/like67.com/blob/main/sessions/002-import-chatgpt-prototype.md">View the raw conversation that produced this &rarr;</a>
+        <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
+      </div>
+
+      <p class="stub-note">Full entry coming in a later session. Topic preview: taking the <abbr title="HyperText Markup Language">HTML</abbr> from the chat, saving it as a real file on the laptop, putting it in a folder version-controlled by Git, and pushing it to GitHub so it lives somewhere besides one machine.</p>
+    </section>
+
+    <!-- ───────── §3 stub ───────── -->
+    <section class="entry" id="s3">
+      <h2><span class="num">§3</span>On the internet</h2>
+      <div class="source">From session 003 &mdash; license, hosting, and <abbr title="Domain Name System">DNS</abbr></div>
+
+      <div class="raw-callout">
+        <a href="https://github.com/SteveRyherd/like67.com/blob/main/sessions/003-license-hosting-dns.md">View the raw conversation that produced this &rarr;</a>
+        <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
+      </div>
+
+      <p class="stub-note">Full entry coming in a later session. Topic preview: picking a license for the code, picking a free host that auto-publishes the site every time you change something (Cloudflare Pages), and pointing the domain <code>like67.com</code> at the host through <abbr title="Domain Name System">DNS</abbr>.</p>
+    </section>
+
+    <!-- ───────── §4 stub ───────── -->
+    <section class="entry" id="s4">
+      <h2><span class="num">§4</span>Looking right on phones</h2>
+      <div class="source">From session 004 &mdash; title, mobile layout, share previews</div>
+
+      <div class="raw-callout">
+        <a href="https://github.com/SteveRyherd/like67.com/blob/main/sessions/004-title-mobile-github.md">View the raw conversation that produced this &rarr;</a>
+        <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
+      </div>
+
+      <p class="stub-note">Full entry coming in a later session. Topic preview: fixing the way the page rendered on iPhones (where iOS Safari was clipping the top of the animation), adding a proper page title for link previews, and laying out the &ldquo;SIX SEVEN&rdquo; chant differently on narrow screens.</p>
+    </section>
+
+    <!-- ───────── §5 stub ───────── -->
+    <section class="entry" id="s5">
+      <h2><span class="num">§5</span>Save it as an app</h2>
+      <div class="source">From session 007 &mdash; fullscreen hints and <abbr title="Progressive Web App">PWA</abbr> install</div>
+
+      <div class="raw-callout">
+        <a href="https://github.com/SteveRyherd/like67.com/blob/main/sessions/007-fullscreen-hints-spa.md">View the raw conversation that produced this &rarr;</a>
+        <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
+      </div>
+
+      <p class="stub-note">Full entry coming in a later session. Topic preview: making the page installable on a phone's home screen so it opens like a real app (Progressive Web App / <abbr title="Progressive Web App">PWA</abbr>), drawing the icons that show up there, and showing a hint to the user telling them how to install it.</p>
+    </section>
+
+    <!-- ───────── §6 stub ───────── -->
+    <section class="entry" id="s6">
+      <h2><span class="num">§6</span>Knowing if anyone's there</h2>
+      <div class="source">From session 010 &mdash; analytics and the corner-link rewrite</div>
+
+      <div class="raw-callout">
+        <a href="https://github.com/SteveRyherd/like67.com/blob/main/sessions/010-analytics-and-corner-link.md">View the raw conversation that produced this &rarr;</a>
+        <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
+      </div>
+
+      <p class="stub-note">Full entry coming in a later session. Topic preview: turning on a privacy-friendly visitor counter (Cloudflare Web Analytics) so I can see how many people land on the site, without using cookies or tracking anyone personally.</p>
+    </section>
+
+    <!-- ───────── §7 stub ───────── -->
+    <section class="entry" id="s7">
+      <h2><span class="num">§7</span>A real share image</h2>
+      <div class="source">From session 011 &mdash; the <abbr title="Open Graph">OG</abbr> image and hint polish</div>
+
+      <div class="raw-callout">
+        <a href="https://github.com/SteveRyherd/like67.com/blob/main/sessions/011-og-image-and-hint-polish.md">View the raw conversation that produced this &rarr;</a>
+        <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
+      </div>
+
+      <p class="stub-note">Full entry coming in a later session. Topic preview: making the picture that shows up when somebody pastes the link into iMessage, Twitter, or Discord. Built with a tiny Python script the <abbr title="Artificial Intelligence">AI</abbr> wrote, so iterating on the image was as fast as iterating on the page.</p>
+    </section>
+
+    <footer class="page-foot">
+      <p>This walkthrough is a curated companion to the project's raw <a href="https://github.com/SteveRyherd/like67.com/blob/main/JOURNAL.md">build journal</a> and per-session <a href="https://github.com/SteveRyherd/like67.com/tree/main/sessions">transcripts</a>. The site itself: <a href="https://like67.com">like67.com</a>.</p>
+      <p>Code &amp; words &copy; Steve Ryherd, licensed <a href="https://github.com/SteveRyherd/like67.com/blob/main/LICENSE">CC BY-NC 4.0</a>.</p>
+    </footer>
+
+  </main>
+
+</div>
+
+<script>
+  // Scrollspy: highlight the TOC entry whose section is in view.
+  (function () {
+    var sections = document.querySelectorAll('section.entry[id]');
+    var sideLinks = document.querySelectorAll('aside.toc ol li');
+    var idToLi = {};
+    sideLinks.forEach(function (li) {
+      var a = li.querySelector('a');
+      if (a) idToLi[a.getAttribute('href').slice(1)] = li;
+    });
+
+    function setActive(id) {
+      sideLinks.forEach(function (li) { li.classList.remove('active'); });
+      if (idToLi[id]) idToLi[id].classList.add('active');
+    }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      sections.forEach(function (s) { io.observe(s); });
+    } else {
+      // fallback: highlight from the hash if any
+      if (location.hash) setActive(location.hash.slice(1));
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -27,3 +27,4 @@ Each session captures:
 - [011 — OG image and hint polish](./011-og-image-and-hint-polish.md) — 1200×630 OG share image generated; `og:image` wired into `index.html`; corner-label opacity bumped to 0.5
 - [012 — The placard](./012-the-placard.md) — wrote `STORY.md`, the first-person origin essay; linked from `README.md`
 - [013 — README restructure](./013-readme-restructure.md) — `STORY.md` made the front door; mission pinned; `ROADMAP.md` added to file list; sessions index completed
+- [014 — Tutorial design pass](./014-tutorial-design.md) — locked in chronological + two-column shape, scope-cut to seven idea-to-live sections, shipped `/how-this-was-made-in-6-7-hours/` with §1 fully fleshed and §2–§7 stubbed; main-site corner-link repointed
