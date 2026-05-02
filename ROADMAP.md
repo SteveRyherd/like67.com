@@ -28,10 +28,10 @@ The tutorial lives at **`/how-this-was-made-in-6-7-hours`** — a single long pa
 The tutorial intentionally covers **only the seven sessions on the idea-to-live spine** — self-referential sessions (kickoff, README rewrites, strategy, the placard) are skipped so the walkthrough stays a how-to, not a meta-doc. Skipped from the tutorial: 001, 005-docs, 006, 008, 009, 012, 013.
 
 - [x] **Session 014 — Tutorial design pass.** Designed the page structure, two-column shape, raw-transcript callout, accordion concepts, question triad. Shipped the page shell at `/how-this-was-made-in-6-7-hours/`, with **§1 (Session 000)** fully fleshed and §2–§7 stubbed. Repointed the main site's corner-link from GitHub to the tutorial.
-- [ ] **Session 015 — Glossary.** Twenty terms in plain English: repo, branch, push, fork, deploy, manifest, OG, PWA, DNS, CDN, etc. Lives in `GLOSSARY.md`. The tutorial's accordion concepts deep-link individual entries.
-- [ ] **Session 016 — Flesh out §2–§4.** Apply the template to: §2 Saving the work (Session 002), §3 On the internet (Session 003), §4 Looking right on phones (Session 004 + chant fix from 005).
-- [ ] **Session 017 — Flesh out §5–§7.** Apply the template to: §5 Save it as an app (Session 007), §6 Knowing if anyone's there (Session 010), §7 A real share image (Session 011).
-- [ ] **Session 018 — Template + gallery.** The "make your own" path. `template/` folder containing a stripped-down meme site, 5-step README in plain English, `GALLERY.md` with one or two seeded examples and a "yours could be here" slot.
+- [x] **Session 015 — Flesh out §2–§4.** Apply the template to: §2 Saving the work (Session 002), §3 On the internet (Session 003), §4 Looking right on phones (Session 004 + chant fix from 005).
+- [x] **Session 016 — Flesh out §5–§7.** Folded into Session 015 — all seven sections fleshed in one pass.
+- [ ] **Session 016 — Glossary.** Twenty-ish terms in plain English drawn from the concepts introduced across all seven tutorial sections: repo, branch, push, deploy, manifest, OG, PWA, DNS, CDN, etc. Lives in `GLOSSARY.md`. The tutorial's accordion concepts deep-link individual entries.
+- [ ] **Session 017 — Template + gallery.** The "make your own" path. `template/` folder containing a stripped-down meme site, 5-step README in plain English, `GALLERY.md` with one or two seeded examples and a "yours could be here" slot.
 
 *Phase 2 done when: a kid who's hooked has somewhere concrete to go, the words to understand what they're reading, and an interactive tutorial that primes them to keep asking their own AI.*
 

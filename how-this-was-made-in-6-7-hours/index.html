@@ -672,7 +672,145 @@
         <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
       </div>
 
-      <p class="stub-note">Full entry coming in a later session. Topic preview: taking the <abbr title="HyperText Markup Language">HTML</abbr> from the chat, saving it as a real file on the laptop, putting it in a folder version-controlled by Git, and pushing it to GitHub so it lives somewhere besides one machine.</p>
+
+      <h3 class="subsection">How it went</h3>
+
+      <div class="col-headers">
+        <div class="left">In plain English</div>
+        <div class="right">To replicate it</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Where I was</div>
+        <div class="pair">
+          <div class="cell"><p>The page existed only inside a chat window. If the tab closed or the conversation got buried, it could be gone. Nothing was saved anywhere I fully controlled.</p></div>
+          <div class="cell"><p>One <abbr title="HyperText Markup Language">HTML</abbr> file assembled from code the AI produced — existing only as a chat message. Not saved to disk, not tracked by any history-keeping software, not backed up anywhere.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I wanted</div>
+        <div class="pair">
+          <div class="cell"><p>To save the work somewhere permanent — a place where every change is recorded, I can roll back to any older version, and the full history is visible to anyone who's curious.</p></div>
+          <div class="cell"><p>A file called <code>index.html</code> saved into a project folder tracked by a program called Git — software that records a full history of every change you make, like an undo button that goes back years. Then uploaded to <a href="https://github.com">GitHub</a>, a website that stores that history online so it's backed up and publicly browsable.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I already knew (that might be new to you)</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I knew that saving a file means putting it somewhere specific — not just in a chat window. I'd heard of GitHub as "where developers put their code," without knowing much more than that.</p>
+          </div>
+          <div class="cell">
+            <p>I had used Git and GitHub before on other projects — so I already knew the basic loop: <em>commit</em> (take a snapshot of the current state) and <em>push</em> (send it to GitHub for safekeeping and sharing). Not everyone starting out will have this background, and that's fine — the concepts section below covers what each step actually does.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I asked</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I asked the AI to help me get the prototype documented and saved into a real project. We figured out what was missing and filled it in together.</p>
+          </div>
+          <div class="cell verbatim">
+            &gt; Now I'd like to document the conversation I've already had with ChatGPT in order to preview the website before creating the project.<br><br>
+            &gt; This session is 002 &mdash; we can copy session 000 basically verbatim from the transcripts I will provide you.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What got built</div>
+        <div class="pair">
+          <div class="cell">
+            <p>The HTML file was saved as a real file in a real folder. That folder was connected to GitHub. Anyone who visits the GitHub page can now see the code, download it, and watch the full history of every change ever made.</p>
+          </div>
+          <div class="cell">
+            <p><code>index.html</code> saved at the top of the project folder, with Git recording a snapshot of that moment. The original ChatGPT conversation preserved alongside it as a companion file. Three short commands in the terminal did the work: <code>git add</code> (choose which files to include in the snapshot), <code>git commit</code> (save the snapshot with a short message describing what changed), <code>git push</code> (send it up to GitHub so it's online and backed up).</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Concepts introduced in this section</h3>
+      <div class="concepts">
+        <div class="hint">Click any concept for a definition and an example.</div>
+        <details>
+          <summary>Git</summary>
+          <div class="body">
+            <p><strong>A version control system.</strong> It watches a folder on your computer and lets you save named snapshots of everything in it. You can go back to any snapshot at any time.</p>
+            <p>Think of it like "track changes" in a document editor, but for your whole project folder.</p>
+          </div>
+        </details>
+        <details>
+          <summary>repo</summary>
+          <div class="body">
+            <p><strong>Short for "repository."</strong> A folder that Git is tracking. When you run <code>git init</code> in a folder, that folder becomes a repo. Everything inside it — files, subfolders — is now part of the record Git keeps.</p>
+          </div>
+        </details>
+        <details>
+          <summary>commit</summary>
+          <div class="body">
+            <p><strong>A saved snapshot of your project at one moment in time.</strong> You give each commit a short message describing what changed. The history of all commits is the full record of how the project evolved.</p>
+            <p>Example: <code>git commit -m "Session 002: import the prototype"</code></p>
+          </div>
+        </details>
+        <details>
+          <summary>push</summary>
+          <div class="body">
+            <p><strong>Uploading your local commits to GitHub</strong> (or another remote). After you commit, the snapshot exists on your machine. <code>git push</code> sends it up so it's online and backed up.</p>
+          </div>
+        </details>
+        <details>
+          <summary>GitHub</summary>
+          <div class="body">
+            <p><strong>A website that hosts Git repos online.</strong> It stores the full history, lets others browse or download the code, and is where Cloudflare Pages (the host we use in <a href="#s3">§3</a>) watches for changes to deploy.</p>
+          </div>
+        </details>
+      </div>
+
+      <h3 class="subsection">Tools I used</h3>
+      <p class="subsection-body">
+        <a href="https://git-scm.com">Git</a> for version control &middot;
+        <a href="https://github.com">GitHub</a> to host the repo online &middot;
+        Terminal (the command-line app on Mac) to run git commands.
+      </p>
+
+      <h3 class="subsection">Commands I ran</h3>
+      <p class="subsection-body">
+        <code>git add index.html sessions/</code> &mdash; stage the files to include in the next commit<br>
+        <code>git commit -m "Session 002: import ChatGPT prototype"</code> &mdash; save the snapshot with a message<br>
+        <code>git push</code> &mdash; upload to GitHub
+      </p>
+
+      <h3 class="subsection">Questions to try</h3>
+      <div class="questions">
+        <div class="q-row">
+          <div class="who">Ask your <abbr title="Artificial Intelligence">AI</abbr></div>
+          <div class="what">
+            <ul>
+              <li>&ldquo;I'm a total beginner &mdash; what is Git, in plain English?&rdquo;</li>
+              <li>&ldquo;What's the difference between Git and GitHub?&rdquo;</li>
+              <li>&ldquo;Walk me through creating my first GitHub repo and pushing a file to it.&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="q-row">
+          <div class="who">Search</div>
+          <div class="what plain">GitHub getting started &middot; what is version control &middot; git add commit push explained</div>
+        </div>
+        <div class="q-row">
+          <div class="who">Ask yourself</div>
+          <div class="what">Is there something you've made &mdash; a story, art, code &mdash; that you'd want backed up and shareable? What would it feel like to know every old version is saved?</div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Going deeper</h3>
+      <div class="deeper">
+        <div class="item">&rarr; <a href="https://docs.github.com/en/get-started/start-your-journey/hello-world">GitHub: Hello World</a> &mdash; their beginner walkthrough</div>
+        <div class="item">&rarr; <a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F">Pro Git: What is Git?</a> &mdash; free, authoritative, readable</div>
+      </div>
     </section>
 
     <!-- ───────── §3 stub ───────── -->
@@ -685,20 +823,309 @@
         <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
       </div>
 
-      <p class="stub-note">Full entry coming in a later session. Topic preview: picking a license for the code, picking a free host that auto-publishes the site every time you change something (Cloudflare Pages), and pointing the domain <code>like67.com</code> at the host through <abbr title="Domain Name System">DNS</abbr>.</p>
+
+      <h3 class="subsection">How it went</h3>
+
+      <div class="col-headers">
+        <div class="left">In plain English</div>
+        <div class="right">To replicate it</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Where I was</div>
+        <div class="pair">
+          <div class="cell"><p>The code was on GitHub, but nobody could actually visit the website. If you clicked the GitHub link, you'd see code — a bunch of text in a file. I wanted a real <abbr title="Uniform Resource Locator">URL</abbr> that just opens the page.</p></div>
+          <div class="cell"><p><code>index.html</code> was in the GitHub repo. No host configured, no domain pointed anywhere. The domain <code>like67.com</code> had been registered at Namecheap but was still pointed at nothing.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I wanted</div>
+        <div class="pair">
+          <div class="cell"><p>I wanted like67.com to open the page when you visited it. And I wanted it to stay current automatically — whenever I changed something, the site should update on its own in about a minute, with no extra steps.</p></div>
+          <div class="cell"><p>A static hosting service with: free tier, auto-deploy on every <code>git push</code>, globally distributed (fast for visitors anywhere), and custom domain support. One-time setup; from then on, "deploy" means <code>git push</code>.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I already knew (that might be new to you)</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I knew that websites have to live somewhere — a "host" — and that hosting sometimes costs money. I knew that domain names have to be pointed at the right place somehow, but I didn't know what that process was called.</p>
+          </div>
+          <div class="cell">
+            <p>That "static hosting" means serving plain files (no server-side code or database needed). That a <abbr title="Content Delivery Network">CDN</abbr> duplicates the site across servers worldwide so every visitor gets a fast copy. That <abbr title="Domain Name System">DNS</abbr> is the system that maps a domain name to a server's address.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I asked</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I asked the AI to help me pick a host and get the site live. We talked through the options and landed on Cloudflare because it's free, fast, and automatically re-publishes the site every time I push a code change.</p>
+          </div>
+          <div class="cell verbatim">
+            &gt; We've got a mockup, we've got documentation, and we've got a github repo. So, we should figure out who we're using for hosting, that way we can setup DNS. I've already purchased a domain through namecheap.<br><br>
+            &gt; I think that CloudFlare might be the way to go.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What got built</div>
+        <div class="pair">
+          <div class="cell">
+            <p>like67.com went live. We also added a license to the code — a statement of what others can do with it (learn from it: yes; copy it for a business: no). From this point on, every time I push a change, the site updates automatically.</p>
+          </div>
+          <div class="cell">
+            <p>Cloudflare Pages linked to the GitHub repo — it watches for new pushes and automatically re-publishes the site when it detects one. A <code>LICENSE</code> file added to the project folder. Cloudflare set as the domain's nameserver (the entry in the internet's address book that says "when someone visits like67.com, send them to Cloudflare") so <abbr title="Domain Name System">DNS</abbr>, <abbr title="Secure Sockets Layer">SSL</abbr> encryption, and the host all live in one dashboard.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Concepts introduced in this section</h3>
+      <div class="concepts">
+        <div class="hint">Click any concept for a definition and an example.</div>
+        <details>
+          <summary>hosting</summary>
+          <div class="body">
+            <p><strong>A computer (or network of computers) that keeps your website running 24/7</strong> and sends the files to anyone who visits. Your laptop could technically be a host, but it'd have to stay on and connected forever. Hosting services do that for you.</p>
+          </div>
+        </details>
+        <details>
+          <summary>DNS</summary>
+          <div class="body">
+            <p><strong>Domain Name System &mdash; the internet's address book.</strong> When you type "like67.com," your browser asks DNS: "what's the address for that?" DNS replies with a number (an IP address) and your browser goes there.</p>
+            <p>Pointing DNS means telling the address book which server to send visitors to.</p>
+          </div>
+        </details>
+        <details>
+          <summary>CDN</summary>
+          <div class="body">
+            <p><strong>Content Delivery Network.</strong> Instead of one server in one city, a <abbr title="Content Delivery Network">CDN</abbr> keeps copies of your site on servers all over the world. A visitor in Japan gets the copy from a Japanese server. Faster for everyone.</p>
+          </div>
+        </details>
+        <details>
+          <summary>deploy</summary>
+          <div class="body">
+            <p><strong>Publishing a new version of your site</strong> so visitors see it. With Cloudflare Pages, deploying is automatic: push your code to GitHub, Cloudflare detects the change and re-publishes within about a minute. "Deploying" in the session logs just means <code>git push</code>.</p>
+          </div>
+        </details>
+        <details>
+          <summary>license</summary>
+          <div class="body">
+            <p><strong>A statement of what others are allowed to do with your work.</strong> Without a license, a public repo is technically all-rights-reserved even though the code is visible.</p>
+            <p>This project uses CC BY-NC 4.0: you can share and learn from it, but not use it commercially, and you must credit the original.</p>
+          </div>
+        </details>
+        <details>
+          <summary>SSL</summary>
+          <div class="body">
+            <p><strong>Secure Sockets Layer &mdash; the encryption that puts "https://" in front of URLs.</strong> It means the connection between a visitor's browser and the server is encrypted. Cloudflare handles this automatically.</p>
+          </div>
+        </details>
+      </div>
+
+      <h3 class="subsection">Tools I used</h3>
+      <p class="subsection-body">
+        <a href="https://pages.cloudflare.com">Cloudflare Pages</a> for hosting &middot;
+        <a href="https://www.namecheap.com">Namecheap</a> for domain registration &middot;
+        <a href="https://github.com">GitHub</a> as the source the host watches.
+      </p>
+
+      <h3 class="subsection">Commands I ran</h3>
+      <p class="subsection-body">
+        <code>git add LICENSE</code><br>
+        <code>git commit -m "Session 003: add CC BY-NC 4.0 license"</code><br>
+        <code>git push</code> &mdash; and from this point forward, this is what "deploy" means.
+      </p>
+
+      <h3 class="subsection">Questions to try</h3>
+      <div class="questions">
+        <div class="q-row">
+          <div class="who">Ask your <abbr title="Artificial Intelligence">AI</abbr></div>
+          <div class="what">
+            <ul>
+              <li>&ldquo;I'm a total beginner &mdash; what is DNS in plain English?&rdquo;</li>
+              <li>&ldquo;What's the difference between a domain registrar and a host?&rdquo;</li>
+              <li>&ldquo;Walk me through getting a GitHub repo live on Cloudflare Pages.&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="q-row">
+          <div class="who">Search</div>
+          <div class="what plain">Cloudflare Pages free tier &middot; what is DNS explained &middot; CC BY-NC 4.0 license</div>
+        </div>
+        <div class="q-row">
+          <div class="who">Ask yourself</div>
+          <div class="what">If pushing code made the live site update in 60 seconds automatically, what would you change first?</div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Going deeper</h3>
+      <div class="deeper">
+        <div class="item">&rarr; <a href="https://developers.cloudflare.com/pages/get-started/git-integration/">Cloudflare Pages: Get started with Git</a></div>
+        <div class="item">&rarr; <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons BY-NC 4.0</a> &mdash; what the license actually says</div>
+      </div>
     </section>
 
     <!-- ───────── §4 stub ───────── -->
     <section class="entry" id="s4">
       <h2><span class="num">§4</span>Looking right on phones</h2>
-      <div class="source">From session 004 &mdash; title, mobile layout, share previews</div>
+      <div class="source">From sessions 004 &amp; 005 &mdash; title, mobile layout, share previews, chant fix</div>
 
       <div class="raw-callout">
         <a href="https://github.com/SteveRyherd/like67.com/blob/main/sessions/004-title-mobile-github.md">View the raw conversation that produced this &rarr;</a>
         <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
       </div>
 
-      <p class="stub-note">Full entry coming in a later session. Topic preview: fixing the way the page rendered on iPhones (where iOS Safari was clipping the top of the animation), adding a proper page title for link previews, and laying out the &ldquo;SIX SEVEN&rdquo; chant differently on narrow screens.</p>
+
+      <h3 class="subsection">How it went</h3>
+
+      <div class="col-headers">
+        <div class="left">In plain English</div>
+        <div class="right">To replicate it</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Where I was</div>
+        <div class="pair">
+          <div class="cell"><p>The site was live — but when I pulled it up on my iPhone, pieces were cut off. The top of the color spiral was clipped. The "SIX SEVEN SIX SEVEN" chant sat below the visible area. When I texted the link, the preview card said "6 7 Meme Chaos Animation," which read as accidentally bad.</p></div>
+          <div class="cell"><p>Root cause of the clipping: a known iOS Safari bug where the page's height is calculated before the address bar collapses out of the way — so the page thought it was taller than what was actually visible on screen, and the top of the animation got cut off. The page also had no <abbr title="Open Graph">OG</abbr> meta tags, so iMessage and social apps had nothing to work with and showed a text-only preview with an auto-generated title.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I wanted</div>
+        <div class="pair">
+          <div class="cell"><p>The page should fill the whole phone screen with nothing cut off. The title in iMessage should be intentional. On a narrow phone screen, the chant should feel like it was designed for mobile — not just squished.</p></div>
+          <div class="cell"><p>A fix for the <code>100vh</code> / viewport clip. A proper <code>&lt;title&gt;</code> tag and <abbr title="Open Graph">OG</abbr> meta tags for link previews. A responsive chant layout. A staging branch so changes could be verified on a real phone before going live.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I already knew (that might be new to you)</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I knew that phones have smaller screens and that sometimes things look different on them. I'd noticed that pasting a link into iMessage shows a preview card — and I knew there was a way to control what appears in it.</p>
+          </div>
+          <div class="cell">
+            <p>That "responsive design" means layout adapts by screen size, via <abbr title="Cascading Style Sheets">CSS</abbr> media queries. That <abbr title="Open Graph">OG</abbr> meta tags (<code>og:title</code>, <code>og:description</code>, <code>og:image</code>) control what social apps and iMessage display. That Git branches let you test changes in isolation before merging to production.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I asked</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I described exactly what I was seeing on the phone — what was cut off, what looked wrong — and we fixed each problem one at a time. I also asked how to test on a preview version of the site before the changes went live.</p>
+          </div>
+          <div class="cell verbatim">
+            &gt; When sending a link through iPhone, the title of the page is "6 7 meme chaos". I think we need a much better title. Something that doesn't seem accidentally cringe.<br><br>
+            &gt; On an iPhone the "six seven six seven" words are cut off below the screen, and the spiral of colors ends prematurely at the top.<br><br>
+            &gt; The font for the "Six seven six seven" part seems small on mobile. Ideally I'd also like the top bar to be black, where the phone time is listed.<br><br>
+            &gt; For mobile devices, maybe something that says "six seven" above the 6 7 and "six seven" below it as well?
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What got built</div>
+        <div class="pair">
+          <div class="cell">
+            <p>The page now fills the iPhone screen edge to edge. The iMessage preview says "like 6… 7." On a phone, the chant wraps above and below the big numbers. The status bar at the top of the phone is black. All of this was tested on a real phone via a preview <abbr title="Uniform Resource Locator">URL</abbr> before going live.</p>
+          </div>
+          <div class="cell">
+            <p>The page height was switched to a newer <abbr title="Cascading Style Sheets">CSS</abbr> value (<code>100dvh</code> — "dynamic viewport height") that recalculates correctly after the address bar collapses. Page title changed to <em>like 6… 7</em>. Full <abbr title="Open Graph">OG</abbr> meta tag suite added. A <code>theme-color</code> meta tag set the phone's status bar background to black. The chant was split into a desktop version and a mobile version, each shown only at the right screen width. All changes tested on <code>preview.like67-com.pages.dev</code> before merging to <code>main</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Concepts introduced in this section</h3>
+      <div class="concepts">
+        <div class="hint">Click any concept for a definition and an example.</div>
+        <details>
+          <summary>viewport</summary>
+          <div class="body">
+            <p><strong>The visible area of the browser window.</strong> On a phone, that's the screen minus any browser chrome (address bar, navigation). <code>100vh</code> means "100% of the viewport height" — but iOS Safari calculated this wrong for years, which is why pages got clipped at the top.</p>
+            <p><code>100dvh</code> (dynamic viewport height) is the fix: it recalculates when the browser chrome collapses.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Open Graph</summary>
+          <div class="body">
+            <p><strong>A set of meta tags that tell iMessage, Twitter, Discord, and other apps what to show when your link is shared.</strong> <code>og:title</code> sets the headline. <code>og:description</code> sets the preview text. <code>og:image</code> sets the thumbnail.</p>
+            <p>Without them, apps guess from the page content — and they usually guess badly.</p>
+          </div>
+        </details>
+        <details>
+          <summary>meta tag</summary>
+          <div class="body">
+            <p><strong>A line in the <code>&lt;head&gt;</code> of an <abbr title="HyperText Markup Language">HTML</abbr> page that gives browsers and crawlers information about the page</strong> — without displaying anything visible on screen.</p>
+            <p>Examples: page title, description, share image, theme color, viewport settings.</p>
+          </div>
+        </details>
+        <details>
+          <summary>responsive design</summary>
+          <div class="body">
+            <p><strong>Making a page adapt its layout based on screen size.</strong> The main tool is a CSS <em>media query</em>: code that says "only apply these styles if the screen is narrower than X pixels."</p>
+            <p>On this site: at full width, the chant is a single row. On a phone, it splits above and below the big numbers.</p>
+          </div>
+        </details>
+        <details>
+          <summary>branch</summary>
+          <div class="body">
+            <p><strong>A separate copy of the code you can work on without affecting the live site.</strong> When the changes look right, you <em>merge</em> the branch back into <code>main</code>.</p>
+            <p>Cloudflare Pages automatically builds every branch and gives it its own preview <abbr title="Uniform Resource Locator">URL</abbr>, so you can test on a real phone before shipping.</p>
+          </div>
+        </details>
+      </div>
+
+      <h3 class="subsection">Tools I used</h3>
+      <p class="subsection-body">
+        Text editor (AI-written changes applied to <code>index.html</code>) &middot;
+        iPhone for real-device testing &middot;
+        <code>preview.like67-com.pages.dev</code> as the staging URL (auto-created by Cloudflare for every branch).
+      </p>
+
+      <h3 class="subsection">Commands I ran</h3>
+      <p class="subsection-body">
+        <code>git checkout -b preview</code> &mdash; create and switch to a testing branch (run once)<br>
+        <code>git push -u origin preview</code> &mdash; push the branch so Cloudflare builds a preview URL<br>
+        <code>git add index.html &amp;&amp; git commit -m "Session 004: title, OG tags, iOS viewport fix"</code><br>
+        <code>git push</code> &mdash; updates the preview URL automatically<br>
+        After confirming on phone: <code>git checkout main &amp;&amp; git merge preview &amp;&amp; git push</code>
+      </p>
+
+      <h3 class="subsection">Questions to try</h3>
+      <div class="questions">
+        <div class="q-row">
+          <div class="who">Ask your <abbr title="Artificial Intelligence">AI</abbr></div>
+          <div class="what">
+            <ul>
+              <li>&ldquo;Why does my website look different on a phone vs. a laptop?&rdquo;</li>
+              <li>&ldquo;Add Open Graph meta tags to my HTML so iMessage shows a nice preview.&rdquo;</li>
+              <li>&ldquo;What is a Git branch and why would I use one?&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="q-row">
+          <div class="who">Search</div>
+          <div class="what plain">iOS Safari 100vh bug &middot; open graph meta tags &middot; git branches for beginners</div>
+        </div>
+        <div class="q-row">
+          <div class="who">Ask yourself</div>
+          <div class="what">Pull up a website you like on your phone. Does it feel like it was designed for the phone, or like a shrunken desktop? What's the difference?</div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Going deeper</h3>
+      <div class="deeper">
+        <div class="item">&rarr; <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries"><abbr title="Mozilla Developer Network">MDN</abbr>: Using media queries</a></div>
+        <div class="item">&rarr; <a href="https://ogp.me">The Open Graph Protocol</a> &mdash; the official spec, readable in ~10 minutes</div>
+      </div>
     </section>
 
     <!-- ───────── §5 stub ───────── -->
@@ -711,7 +1138,137 @@
         <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
       </div>
 
-      <p class="stub-note">Full entry coming in a later session. Topic preview: making the page installable on a phone's home screen so it opens like a real app (Progressive Web App / <abbr title="Progressive Web App">PWA</abbr>), drawing the icons that show up there, and showing a hint to the user telling them how to install it.</p>
+
+      <h3 class="subsection">How it went</h3>
+
+      <div class="col-headers">
+        <div class="left">In plain English</div>
+        <div class="right">To replicate it</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Where I was</div>
+        <div class="pair">
+          <div class="cell"><p>The site worked great in a browser. But visiting it on your phone meant typing the URL or digging up a bookmark — it lived on the web, not on your home screen. And there was no hint anywhere telling people they could go fullscreen on a desktop.</p></div>
+          <div class="cell"><p>No <abbr title="Progressive Web App">PWA</abbr> manifest, no app icons, no Apple-specific meta tags. The double-click fullscreen toggle already existed in the code but was invisible — no label pointed at it. Same for the home screen install gesture on mobile.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I wanted</div>
+        <div class="pair">
+          <div class="cell"><p>Two things: a small hint on desktop telling people to double-click for fullscreen, and a way for people on phones to save the site to their home screen so it opens like a real app — no browser bar, no address bar, just the page filling the whole screen.</p></div>
+          <div class="cell"><p>A <abbr title="Progressive Web App">PWA</abbr> manifest (<code>manifest.json</code>) — a small config file browsers read to know how to treat the site as an installable app. Icons for the home screen. Apple-specific meta tags (iOS doesn't fully follow the standard PWA spec). Hints that appear only on the right kind of device.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I already knew (that might be new to you)</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I'd noticed that some sites — when you save them to your home screen on iOS — open like apps, without the Safari address bar. I knew this was possible but not what it took to set up.</p>
+          </div>
+          <div class="cell">
+            <p>That <abbr title="Progressive Web App">PWA</abbr> stands for Progressive Web App — a website browsers can treat like an installed app. That <code>manifest.json</code> is the file that describes the app to the browser. That iOS requires a separate set of Apple meta tags because Safari has its own rules that predate the <abbr title="Progressive Web App">PWA</abbr> standard.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I asked</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I described what I wanted and asked the AI to wire it up — including making the hints smart enough to show only on the right kind of device (mouse vs. touchscreen).</p>
+          </div>
+          <div class="cell verbatim">
+            &gt; Let's add a small subtle message in the bottom-left on desktop computers to let users know that double-clicking will open full screen. This should only display when on a desktop browser window.<br><br>
+            &gt; There are other things we could do for mobile. Like adding a mention about saving a shortcut to the desktop. We can make this a Single Page App this session.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What got built</div>
+        <div class="pair">
+          <div class="cell">
+            <p>The site can now be saved to your phone's home screen and opens like an app — no address bar, no browser tabs, just the animation. When you first visit on a phone, a small hint fades in at the bottom telling you how to install it. On desktop, a different hint tells you to double-click for fullscreen. Both quietly fade out after a few seconds.</p>
+          </div>
+          <div class="cell">
+            <p><code>manifest.json</code> created with display mode <code>standalone</code>, black theme, and both icon sizes. Two icon files generated: <code>assets/icon-192.png</code> and <code>assets/icon-512.png</code> — deep purple background with hot-pink/cyan "6 7." Apple meta tags added to <code>&lt;head&gt;</code>. Two hint labels in the page, each hidden by default and revealed only on the right device type via <abbr title="Cascading Style Sheets">CSS</abbr> media queries (<code>hover: hover</code> for mouse, <code>hover: none</code> for touch). <abbr title="JavaScript">JS</abbr> checks if the app is already installed and suppresses the mobile hint if so.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Concepts introduced in this section</h3>
+      <div class="concepts">
+        <div class="hint">Click any concept for a definition and an example.</div>
+        <details>
+          <summary>PWA</summary>
+          <div class="body">
+            <p><strong>Progressive Web App.</strong> A website that browsers can treat like an installed app — it gets a home screen icon, opens in a standalone window without a browser bar, and can work offline. The user doesn't install it from an app store; they save it directly from the browser.</p>
+          </div>
+        </details>
+        <details>
+          <summary>manifest.json</summary>
+          <div class="body">
+            <p><strong>A small config file that tells the browser how to treat the site as an app.</strong> It specifies the app's name, icons, background color, and how it should display when launched. The browser reads it when someone tries to install the site to their home screen.</p>
+          </div>
+        </details>
+        <details>
+          <summary>standalone mode</summary>
+          <div class="body">
+            <p><strong>When a PWA opens without any browser UI around it</strong> — no address bar, no tabs, no browser back button. Looks just like a native app. Set in <code>manifest.json</code> as <code>"display": "standalone"</code>.</p>
+          </div>
+        </details>
+        <details>
+          <summary>media query (pointer type)</summary>
+          <div class="body">
+            <p>A media query is <abbr title="Cascading Style Sheets">CSS</abbr> code that only applies under certain conditions. Here we used pointer type to detect the input device: <code>(hover: hover)</code> means a mouse is present; <code>(hover: none)</code> means it's a touchscreen. That's how the right hint appears on the right device.</p>
+          </div>
+        </details>
+      </div>
+
+      <h3 class="subsection">Tools I used</h3>
+      <p class="subsection-body">
+        ImageMagick (command-line image tool, used by the AI to generate the icon PNGs) &middot;
+        <code>manifest.json</code> written by the AI, saved directly to the repo &middot;
+        iPhone for testing the home screen install prompt.
+      </p>
+
+      <h3 class="subsection">Commands I ran</h3>
+      <p class="subsection-body">
+        <code>git add -A</code> &mdash; stage all new files (icons, manifest, updated HTML)<br>
+        <code>git commit -m "Session 007: fullscreen hints, PWA manifest, home-screen install"</code><br>
+        <code>git push</code>
+      </p>
+
+      <h3 class="subsection">Questions to try</h3>
+      <div class="questions">
+        <div class="q-row">
+          <div class="who">Ask your <abbr title="Artificial Intelligence">AI</abbr></div>
+          <div class="what">
+            <ul>
+              <li>&ldquo;What is a PWA and what does it take to make one?&rdquo;</li>
+              <li>&ldquo;Write me a manifest.json for a site called [my site name].&rdquo;</li>
+              <li>&ldquo;How do I make my website installable on an iPhone home screen?&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="q-row">
+          <div class="who">Search</div>
+          <div class="what plain">what is a PWA &middot; manifest.json explained &middot; add to home screen iOS how to</div>
+        </div>
+        <div class="q-row">
+          <div class="who">Ask yourself</div>
+          <div class="what">If you could save any website to your home screen like an app, which one would you pick? What makes a site feel worth keeping that close?</div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Going deeper</h3>
+      <div class="deeper">
+        <div class="item">&rarr; <a href="https://web.dev/articles/progressive-web-apps">web.dev: Progressive Web Apps</a> &mdash; Google's guide, readable and current</div>
+        <div class="item">&rarr; <a href="https://developer.mozilla.org/en-US/docs/Web/Manifest"><abbr title="Mozilla Developer Network">MDN</abbr>: Web App Manifest</a> &mdash; every field explained</div>
+      </div>
     </section>
 
     <!-- ───────── §6 stub ───────── -->
@@ -724,7 +1281,136 @@
         <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
       </div>
 
-      <p class="stub-note">Full entry coming in a later session. Topic preview: turning on a privacy-friendly visitor counter (Cloudflare Web Analytics) so I can see how many people land on the site, without using cookies or tracking anyone personally.</p>
+
+      <h3 class="subsection">How it went</h3>
+
+      <div class="col-headers">
+        <div class="left">In plain English</div>
+        <div class="right">To replicate it</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Where I was</div>
+        <div class="pair">
+          <div class="cell"><p>The site was live and looking right, but I had no idea if anyone was visiting. The bottom-right corner had a small GitHub icon — fine if you already know what GitHub is, but not exactly inviting to a curious visitor who doesn't.</p></div>
+          <div class="cell"><p>No analytics wired up anywhere. The corner link was an <abbr title="Scalable Vector Graphics">SVG</abbr> GitHub icon — technically a path to the source, but not a label that makes someone want to click.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I wanted</div>
+        <div class="pair">
+          <div class="cell"><p>A way to see how many people were visiting — without tracking them personally or using cookies. And a friendlier label in the corner that tells you where the click actually goes.</p></div>
+          <div class="cell"><p>A privacy-first analytics solution: no cookies, no personal data, COPPA-safe for underage visitors. And copy that reads as an invitation, not just a technical breadcrumb.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I already knew (that might be new to you)</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I knew most websites track visitors and that some tracking tools are invasive. I wanted something lightweight — just a headcount, not a surveillance system.</p>
+          </div>
+          <div class="cell">
+            <p>That Cloudflare, already hosting the site, offers their own analytics tool — privacy-focused, no cookies, just aggregate counts. That Cloudflare Pages can auto-inject the analytics script without me touching the <abbr title="HyperText Markup Language">HTML</abbr> at all — you flip a switch in the dashboard and it appears on every page automatically.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I asked</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I asked to turn on analytics and swap the GitHub icon for something friendlier. The analytics part happened entirely in Cloudflare's dashboard — no code needed.</p>
+          </div>
+          <div class="cell verbatim">
+            &gt; I'm ready to turn on some analytics on Cloudflare.<br><br>
+            (Corner copy chosen in conversation: "How was this made? &rarr;" &mdash; points at the story, which is the hook. "Make your own &rarr;" gets saved for when the template exists in Phase 2.)
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What got built</div>
+        <div class="pair">
+          <div class="cell">
+            <p>The GitHub icon was replaced with the words "How was this made? →" in the same quiet style as the other corner hints. Cloudflare now quietly counts visitors, referrers, and page hits — without placing a single cookie on anyone's device.</p>
+          </div>
+          <div class="cell">
+            <p>In <code>index.html</code>: the <code>.gh-link</code> <abbr title="Scalable Vector Graphics">SVG</abbr> icon replaced by a <code>.corner-link</code> text anchor. Same font, size, opacity, and hover behavior as the existing hints — all three corner labels now read as one family. Analytics: enabled in Cloudflare dashboard under Analytics &amp; Logs &rarr; Web Analytics. Cloudflare auto-detected the Pages project and injected the beacon script — nothing added to the repo.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Concepts introduced in this section</h3>
+      <div class="concepts">
+        <div class="hint">Click any concept for a definition and an example.</div>
+        <details>
+          <summary>analytics</summary>
+          <div class="body">
+            <p><strong>Data about who visits your site and what they do.</strong> At a basic level: how many people came today, where did they come from, which pages did they look at? More invasive tools track individuals across the web. Cloudflare Web Analytics only gives you aggregates — totals, not profiles.</p>
+          </div>
+        </details>
+        <details>
+          <summary>cookies</summary>
+          <div class="body">
+            <p><strong>Small files a website stores in your browser to remember things about you.</strong> Often used for login sessions (useful) or cross-site tracking (the kind people find creepy). Cloudflare Web Analytics works without any cookies at all.</p>
+          </div>
+        </details>
+        <details>
+          <summary>beacon script</summary>
+          <div class="body">
+            <p><strong>A tiny piece of JavaScript that quietly signals a server when a page loads</strong> — that signal is what analytics tools use to count a visit. Cloudflare's beacon is auto-injected by their platform, so you turn it on in the dashboard and it appears on every page without touching the repo.</p>
+          </div>
+        </details>
+        <details>
+          <summary>COPPA</summary>
+          <div class="body">
+            <p><strong>Children's Online Privacy Protection Act</strong> — a US law restricting what data can be collected from users under 13. Since this site could easily be visited by kids, using a tracker that collects no personal data keeps it compliant.</p>
+          </div>
+        </details>
+      </div>
+
+      <h3 class="subsection">Tools I used</h3>
+      <p class="subsection-body">
+        <a href="https://cloudflare.com">Cloudflare</a> Web Analytics (enabled in the dashboard, no code change) &middot;
+        Text editor for the corner-link <abbr title="HyperText Markup Language">HTML</abbr> change.
+      </p>
+
+      <h3 class="subsection">Commands I ran</h3>
+      <p class="subsection-body">
+        Analytics setup was entirely in the Cloudflare dashboard — no terminal commands needed for that part.<br>
+        <code>git add index.html &amp;&amp; git commit -m "Session 010: corner link rewrite; analytics enabled"</code><br>
+        <code>git push</code>
+      </p>
+
+      <h3 class="subsection">Questions to try</h3>
+      <div class="questions">
+        <div class="q-row">
+          <div class="who">Ask your <abbr title="Artificial Intelligence">AI</abbr></div>
+          <div class="what">
+            <ul>
+              <li>&ldquo;What's the difference between privacy-friendly analytics and regular tracking?&rdquo;</li>
+              <li>&ldquo;How does Cloudflare Web Analytics work without cookies?&rdquo;</li>
+              <li>&ldquo;What is COPPA and why does it matter for websites kids might visit?&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="q-row">
+          <div class="who">Search</div>
+          <div class="what plain">Cloudflare Web Analytics review &middot; cookie-free analytics options &middot; COPPA basics</div>
+        </div>
+        <div class="q-row">
+          <div class="who">Ask yourself</div>
+          <div class="what">If you built something and put it on the internet, what would you want to know about who found it?</div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Going deeper</h3>
+      <div class="deeper">
+        <div class="item">&rarr; <a href="https://developers.cloudflare.com/analytics/web-analytics/">Cloudflare Web Analytics docs</a></div>
+        <div class="item">&rarr; <a href="https://www.ftc.gov/business-guidance/privacy-security/childrens-privacy">FTC: COPPA guidance</a> &mdash; what it actually requires</div>
+      </div>
     </section>
 
     <!-- ───────── §7 stub ───────── -->
@@ -737,7 +1423,141 @@
         <div class="sub">The unedited prompts and replies. This page is the curated version.</div>
       </div>
 
-      <p class="stub-note">Full entry coming in a later session. Topic preview: making the picture that shows up when somebody pastes the link into iMessage, Twitter, or Discord. Built with a tiny Python script the <abbr title="Artificial Intelligence">AI</abbr> wrote, so iterating on the image was as fast as iterating on the page.</p>
+
+      <h3 class="subsection">How it went</h3>
+
+      <div class="col-headers">
+        <div class="left">In plain English</div>
+        <div class="right">To replicate it</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Where I was</div>
+        <div class="pair">
+          <div class="cell"><p>When you pasted the link into iMessage or Discord, the preview card showed plain text — nothing that captured the visual chaos of the actual site. It looked like any ordinary link.</p></div>
+          <div class="cell"><p>The <abbr title="Open Graph">OG</abbr> title and description tags from §4 were in place, but <code>og:image</code> was missing. Without it, social platforms fall back to a text-only card. No image for their scrapers to find.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I wanted</div>
+        <div class="pair">
+          <div class="cell"><p>A thumbnail that captures the chaos — so when someone shares the link, the preview card makes the recipient immediately understand what they're about to click. The image should feel like the site.</p></div>
+          <div class="cell"><p>A 1200&times;630 pixel PNG (the standard <abbr title="Open Graph">OG</abbr> image size). Generated by a script the <abbr title="Artificial Intelligence">AI</abbr> wrote — so if I want to tweak it, I change a line of code and re-run it, same as editing the HTML.</p></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I already knew (that might be new to you)</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I'd seen those preview cards in iMessage and Discord a thousand times. I knew there was a way to control what they show — we'd already set up the title and description in §4. The image was the missing piece.</p>
+          </div>
+          <div class="cell">
+            <p>That <code>og:image</code> is the specific tag that controls the thumbnail. That 1200&times;630 is the standard size most platforms expect. That Python's Pillow library can generate images from code — which means the <abbr title="Artificial Intelligence">AI</abbr> can write the image generator the same way it writes anything else, and iteration is as fast as any other change.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What I asked</div>
+        <div class="pair">
+          <div class="cell">
+            <p>I described the visual feel I wanted — chaotic, matching the site — and asked the AI to build it. We tested the result using a tool that simulates what social platforms show, then iterated: the first version was missing a headline and a call-to-action, so we added those and regenerated.</p>
+          </div>
+          <div class="cell verbatim">
+            &gt; According to our roadmap we should be making an OG image and share card.<br><br>
+            (After testing on opengraph.xyz, revised to add:)<br>
+            &mdash; Headline: "like 6&hellip; 7" at the top<br>
+            &mdash; Tagline: "you know why you're here." below the numbers<br>
+            &mdash; <abbr title="Call to Action">CTA</abbr> pill: "like67.com" at the bottom
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">What got built</div>
+        <div class="pair">
+          <div class="cell">
+            <p>A real share image — 1200&times;630 pixels of the same chaos as the page: dark glowing background, big "6 ⚡ 7" in the centre, the site name at the top, and a "like67.com" button at the bottom. Paste the link anywhere now and that's what shows up.</p>
+          </div>
+          <div class="cell">
+            <p>A Python script (written by the <abbr title="Artificial Intelligence">AI</abbr>, using the Pillow image library) generates the PNG: radial gradient background, coloured glow blobs, scanlines, glowing number glyphs, lightning bolt, headline, tagline, and pill <abbr title="Call to Action">CTA</abbr>. Saved to <code>assets/og-image.png</code>. Wired into <code>index.html</code> with <code>og:image</code> and <code>twitter:image</code> tags; <code>twitter:card</code> upgraded to <code>summary_large_image</code> for the big-preview format on X/Twitter and Discord. Tested via <a href="https://opengraph.xyz">opengraph.xyz</a> and revised once before shipping.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Concepts introduced in this section</h3>
+      <div class="concepts">
+        <div class="hint">Click any concept for a definition and an example.</div>
+        <details>
+          <summary>OG image</summary>
+          <div class="body">
+            <p><strong>The thumbnail that appears when a link is shared on iMessage, Discord, Twitter, Slack, and similar apps.</strong> Set by <code>&lt;meta property="og:image"&gt;</code> in the page's <code>&lt;head&gt;</code>. Standard size: 1200&times;630 pixels.</p>
+            <p>Without it, platforms either show a blank card or guess an image from the page — which usually looks bad.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Python script</summary>
+          <div class="body">
+            <p><strong>A small program written in the Python language</strong> that runs on your computer and does a specific job — in this case, generate an image file from scratch. The <abbr title="Artificial Intelligence">AI</abbr> wrote the script; running it was one command in the terminal. Generating images with code means iteration is instant: change a value, re-run, see the result.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Pillow</summary>
+          <div class="body">
+            <p><strong>A Python library for creating and editing images.</strong> A "library" is a collection of pre-written code you can use in your own scripts. Pillow handles drawing shapes, text, gradients, and layering — everything needed to build the OG image programmatically without opening a design tool.</p>
+          </div>
+        </details>
+        <details>
+          <summary>summary_large_image</summary>
+          <div class="body">
+            <p><strong>A Twitter/X card format that shows a big image preview</strong> instead of a small thumbnail beside the text. Discord and some other platforms also respect this value. Set via <code>&lt;meta name="twitter:card" content="summary_large_image"&gt;</code>.</p>
+          </div>
+        </details>
+      </div>
+
+      <h3 class="subsection">Tools I used</h3>
+      <p class="subsection-body">
+        Python + <a href="https://pillow.readthedocs.io">Pillow</a> (image generation — script written by the <abbr title="Artificial Intelligence">AI</abbr>) &middot;
+        <a href="https://opengraph.xyz">opengraph.xyz</a> for testing how the card renders across platforms &middot;
+        Text editor for meta tag additions to <code>index.html</code>.
+      </p>
+
+      <h3 class="subsection">Commands I ran</h3>
+      <p class="subsection-body">
+        <code>python gen_og.py</code> &mdash; run the AI-written script to generate <code>assets/og-image.png</code><br>
+        <code>git add -A &amp;&amp; git commit -m "Session 011: OG share image, expanded meta, hint opacity bump"</code><br>
+        <code>git push</code>
+      </p>
+
+      <h3 class="subsection">Questions to try</h3>
+      <div class="questions">
+        <div class="q-row">
+          <div class="who">Ask your <abbr title="Artificial Intelligence">AI</abbr></div>
+          <div class="what">
+            <ul>
+              <li>&ldquo;Write a Python script using Pillow that generates a 1200&times;630 image with [my text and colors] on it.&rdquo;</li>
+              <li>&ldquo;What size should an OG image be, and what do different platforms expect?&rdquo;</li>
+              <li>&ldquo;My iMessage link preview looks bad — what meta tags do I need?&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="q-row">
+          <div class="who">Search</div>
+          <div class="what plain">OG image size guide &middot; opengraph.xyz &middot; Python Pillow getting started</div>
+        </div>
+        <div class="q-row">
+          <div class="who">Ask yourself</div>
+          <div class="what">When someone shares your site in a group chat, what's the first impression you want to make? What image would make someone want to tap it?</div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Going deeper</h3>
+      <div class="deeper">
+        <div class="item">&rarr; <a href="https://ogp.me">The Open Graph Protocol</a> &mdash; the full spec, readable in about 10 minutes</div>
+        <div class="item">&rarr; <a href="https://pillow.readthedocs.io/en/stable/handbook/tutorial.html">Pillow Tutorial</a> &mdash; image generation basics in Python</div>
+      </div>
     </section>
 
     <footer class="page-foot">
