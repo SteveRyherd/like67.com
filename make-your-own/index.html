@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How it was made — like67.com</title>
+<meta name="description" content="like67.com was built in an afternoon by talking to an AI — no coding by hand. Here's the story, a shortcut to build your own, and links to go as deep as you want.">
+<meta name="theme-color" content="#1a1a18">
+
+<meta property="og:title" content="How it was made — like67.com">
+<meta property="og:description" content="Built in an afternoon by talking to an AI. Here's the story, a shortcut to build your own, and links to go as deep as you want.">
+<meta property="og:image" content="https://like67.com/assets/og-image.png">
+<meta property="og:url" content="https://like67.com/make-your-own">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root {
+    --bg: #F5EFE2;
+    --bg-warm: #EFE8D6;
+    --bg-card: #ECE5D2;
+    --ink: #1A1A18;
+    --ink-soft: #4A4A45;
+    --ink-muted: #76746C;
+    --rule: #D9D2BE;
+    --rule-strong: #C7BFA9;
+    --link: #B3306B;
+    --pink-bg: #FBE4ED;
+    --pink-ink: #8B1F4F;
+    --pink-rule: #F2BCD2;
+    --cyan-bg: #DCEEF1;
+    --cyan-ink: #195C68;
+    --amber-bg: #F7EBC8;
+    --amber-ink: #6E520B;
+    --code-bg: #E5DEC9;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Charter", Georgia, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); text-decoration: none; border-bottom: 1px solid currentColor; }
+  a:hover { color: var(--ink); }
+  abbr[title] {
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--rule-strong);
+    cursor: help;
+  }
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* ── top bar ─────────────────────────────────────────── */
+  header.topbar {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 10px 20px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header.topbar a { color: var(--bg); border-bottom-color: rgba(255,255,255,0.3); }
+  header.topbar a:hover { color: #fff; border-bottom-color: #fff; }
+  header.topbar .brand { font-weight: 500; letter-spacing: 0.04em; }
+  header.topbar .brand .accent { color: #FF4FA2; }
+
+  /* ── layout ──────────────────────────────────────────── */
+  .layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 40px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 32px 80px;
+  }
+  aside.toc {
+    position: sticky;
+    top: 56px;
+    align-self: start;
+    height: calc(100vh - 76px);
+    overflow-y: auto;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.5;
+    padding-right: 8px;
+  }
+  aside.toc h2 {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+
+  /* plain bullet list — no links */
+  aside.toc .plain-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+  }
+  aside.toc .plain-list li {
+    padding: 4px 10px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+  }
+  aside.toc .plain-list li::before {
+    content: "·";
+    color: var(--ink-muted);
+    flex-shrink: 0;
+  }
+
+  /* layers list — with links */
+  aside.toc .layers-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+  }
+  aside.toc .layers-list li {
+    margin: 0;
+  }
+  aside.toc .layers-list li a {
+    display: block;
+    padding: 5px 10px;
+    color: var(--ink-soft);
+    border-bottom: none;
+  }
+  aside.toc .layers-list li a:hover { color: var(--ink); background: var(--bg-warm); }
+  aside.toc .layers-list li .layer-num {
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    margin-right: 5px;
+  }
+  aside.toc .layers-list li.current a {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  aside.toc .layers-list li.current .layer-num { color: var(--link); }
+
+  aside.toc .footer-link {
+    margin-top: 28px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-muted);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  aside.toc .footer-link a { color: var(--ink-muted); border-bottom-color: var(--rule); }
+  aside.toc .footer-link a:hover { color: var(--ink); }
+
+  /* ── main column ─────────────────────────────────────── */
+  main { max-width: 780px; }
+
+  .page-intro {
+    margin-bottom: 48px;
+  }
+  .page-intro h1 {
+    font-family: var(--font-sans);
+    font-size: 34px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .page-intro .deck {
+    font-family: var(--font-sans);
+    color: var(--ink-muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
+  }
+  .page-intro p { margin: 0 0 14px; }
+  .page-intro p:last-child { margin-bottom: 0; }
+  .page-intro p.lead { font-size: 19px; }
+
+  /* ── layer nav ───────────────────────────────────────── */
+  .layer-nav {
+    margin: 40px 0 52px;
+    font-family: var(--font-sans);
+  }
+  .layer-nav .ln-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .layer-nav .ln-item {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    align-items: baseline;
+    gap: 0 12px;
+    padding: 11px 0;
+    border-top: 1px solid var(--rule);
+    font-size: 15px;
+  }
+  .layer-nav .ln-item:last-child { border-bottom: 1px solid var(--rule); }
+  .layer-nav .ln-num {
+    color: var(--ink-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .layer-nav .ln-body { color: var(--ink-soft); line-height: 1.4; }
+  .layer-nav .ln-body strong { color: var(--ink); font-weight: 500; }
+  .layer-nav .ln-body .sub { display: block; font-size: 13px; color: var(--ink-muted); margin-top: 2px; }
+  .layer-nav .ln-action { font-size: 13px; white-space: nowrap; }
+  .layer-nav .ln-item.current .ln-num { color: var(--link); }
+  .layer-nav .ln-item.current .ln-body strong { color: var(--link); }
+  .layer-nav .ln-item.current .ln-action {
+    font-size: 12px;
+    color: var(--pink-ink);
+    background: var(--pink-bg);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* ── section divider ─────────────────────────────────── */
+  .section-head {
+    margin: 52px 0 24px;
+    padding-top: 40px;
+    border-top: 1px solid var(--rule);
+  }
+  .section-head h2 {
+    font-family: var(--font-sans);
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .section-head .deck {
+    font-family: var(--font-sans);
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+
+  /* ── checklist ──────────────────────────────────────── */
+  .checklist {
+    background: var(--cyan-bg);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 0 0 20px;
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    color: var(--cyan-ink);
+  }
+  .checklist .label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+  .checklist ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .checklist ul li {
+    padding: 3px 0 3px 22px;
+    position: relative;
+  }
+  .checklist ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    opacity: 0.5;
+  }
+
+  /* ── note block ─────────────────────────────────────── */
+  .note {
+    background: var(--amber-bg);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 0 0 28px;
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    color: var(--amber-ink);
+    line-height: 1.55;
+  }
+  .note strong { font-weight: 600; }
+  .note a { color: var(--amber-ink); border-bottom-color: rgba(110,82,11,0.35); }
+
+  /* ── prompt block ───────────────────────────────────── */
+  .prompt-wrap {
+    margin-bottom: 48px;
+  }
+  .prompt-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-family: var(--font-sans);
+  }
+  .prompt-header .prompt-title {
+    font-size: 13px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .copy-btn {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.15s, color 0.15s;
+    flex-shrink: 0;
+  }
+  .copy-btn:hover { background: #333; }
+  .copy-btn.copied { background: #2a6e3a; color: #fff; }
+  .prompt-box {
+    background: #1E1D1A;
+    color: #E8E2D4;
+    border-radius: 8px;
+    padding: 24px 28px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+    border: 1px solid rgba(255,255,255,0.06);
+    max-height: 520px;
+    overflow-y: auto;
+  }
+  .prompt-box::-webkit-scrollbar { width: 6px; }
+  .prompt-box::-webkit-scrollbar-track { background: transparent; }
+  .prompt-box::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+  /* ── footer ─────────────────────────────────────────── */
+  footer.page-foot {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+  footer.page-foot a { color: var(--ink-muted); border-bottom-color: var(--rule); }
+  footer.page-foot a:hover { color: var(--ink); }
+
+  /* ── narrow / mobile ────────────────────────────────── */
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; padding: 20px 18px 60px; gap: 20px; }
+    aside.toc { display: none; }
+    main { max-width: none; }
+    .page-intro h1 { font-size: 28px; }
+    .prompt-box { font-size: 12px; max-height: 380px; padding: 18px 16px; }
+    .layer-nav .ln-item { grid-template-columns: 18px 1fr; gap: 0 10px; }
+    .layer-nav .ln-action { grid-column: 2; margin-top: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="brand">like <span class="accent">6&hellip;7</span> &nbsp;/&nbsp; how it was made</span>
+  <a href="https://like67.com">&larr; back to the site</a>
+</header>
+
+<div class="layout">
+
+  <aside class="toc" aria-label="Sidebar">
+    <h2>What the prompt covers</h2>
+    <ul class="plain-list">
+      <li>Clarify your concept</li>
+      <li>Accounts &amp; tools</li>
+      <li>Build the page</li>
+      <li>Back it up on GitHub</li>
+      <li>Free hosting</li>
+      <li>Custom domain &amp; <abbr title="Domain Name System">DNS</abbr></li>
+      <li>A safe preview copy</li>
+      <li>You're done</li>
+    </ul>
+
+    <h2>Go deeper</h2>
+    <ul class="layers-list">
+      <li><a href="https://like67.com"><span class="layer-num">1</span>The site</a></li>
+      <li class="current"><a href="#"><span class="layer-num">2</span>How it was made</a></li>
+      <li><a href="https://like67.com/how-this-was-made-in-6-7-hours"><span class="layer-num">3</span>Full walkthrough</a></li>
+      <li><a href="https://github.com/SteveRyherd/like67.com/tree/main/sessions"><span class="layer-num">4</span>The conversations</a></li>
+      <li><a href="https://github.com/SteveRyherd/like67.com"><span class="layer-num">5</span>The code</a></li>
+    </ul>
+
+    <div class="footer-link">
+      <a href="https://like67.com/how-this-was-made-in-6-7-hours">full walkthrough &rarr;</a><br>
+      <a href="https://github.com/SteveRyherd/like67.com">view the code (on github.com) &rarr;</a>
+    </div>
+  </aside>
+
+  <main>
+
+    <div class="page-intro">
+      <h1>How it was made</h1>
+      <div class="deck">One afternoon. One AI. Zero lines of code written by hand.</div>
+
+      <p class="lead">This whole site — the flashing numbers, the colors, the confetti, even this page — was built by typing into a chat with an AI. Not by writing code. Just by describing what we wanted, and asking it to figure out the rest.</p>
+
+      <p>It worked. And it took about six or seven hours spread across a few days, mostly learning how things like hosting and domain names work — stuff that's confusing the first time, obvious the second time.</p>
+
+      <p>If you want to understand how, or try it yourself, pick how deep you want to go.</p>
+    </div>
+
+    <div class="layer-nav">
+      <div class="ln-label">How far do you want to go?</div>
+
+      <div class="ln-item">
+        <span class="ln-num">1</span>
+        <span class="ln-body">
+          <strong>The site</strong>
+          <span class="sub">You were already there.</span>
+        </span>
+        <span class="ln-action"><a href="https://like67.com">like67.com</a></span>
+      </div>
+
+      <div class="ln-item current">
+        <span class="ln-num">2</span>
+        <span class="ln-body">
+          <strong>This page</strong>
+          <span class="sub">The short version, plus a prompt to build your own.</span>
+        </span>
+        <span class="ln-action">you&rsquo;re here</span>
+      </div>
+
+      <div class="ln-item">
+        <span class="ln-num">3</span>
+        <span class="ln-body">
+          <strong>The full walkthrough</strong>
+          <span class="sub">Every step explained — in plain English and in technical detail. Side by side.</span>
+        </span>
+        <span class="ln-action"><a href="https://like67.com/how-this-was-made-in-6-7-hours">read it &rarr;</a></span>
+      </div>
+
+      <div class="ln-item">
+        <span class="ln-num">4</span>
+        <span class="ln-body">
+          <strong>The actual conversations</strong>
+          <span class="sub">Every prompt that was typed. Every reply the AI gave. Saved.</span>
+        </span>
+        <span class="ln-action"><a href="https://github.com/SteveRyherd/like67.com/tree/main/sessions">see them &rarr;</a></span>
+      </div>
+
+      <div class="ln-item">
+        <span class="ln-num">5</span>
+        <span class="ln-body">
+          <strong>The raw code</strong>
+          <span class="sub">The actual files that make the site work.</span>
+        </span>
+        <span class="ln-action"><a href="https://github.com/SteveRyherd/like67.com">github.com &rarr;</a></span>
+      </div>
+    </div>
+
+    <div class="section-head" id="the-prompt">
+      <h2>Make your own</h2>
+      <div class="deck">One prompt. Paste it into any AI. It walks you through the whole thing.</div>
+    </div>
+
+    <p style="font-family: var(--font-sans); font-size: 15.5px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 28px;">Copy the prompt below and paste it into <a href="https://claude.ai">Claude</a>, <a href="https://chatgpt.com">ChatGPT</a>, <a href="https://gemini.google.com">Gemini</a>, or any other AI. It'll ask you a few questions first, then guide you step by step. You don't need any experience — it starts from scratch.</p>
+
+    <div class="checklist">
+      <div class="label">You'll end up with</div>
+      <ul>
+        <li>A real webpage, live on the internet, at a URL you own</li>
+        <li>The code backed up so you can change it any time</li>
+        <li>Free hosting that updates automatically when you make a change</li>
+        <li>A safe test copy of the site so you can try things without breaking it</li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <strong>You don't need anything to start.</strong> The prompt opens by asking what you already have — accounts, tools, a domain. If you have none of those, it starts there. If you have some, it skips ahead.
+    </div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-header">
+        <span class="prompt-title">The prompt — copy everything below</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyPrompt()">Copy prompt</button>
+      </div>
+      <div class="prompt-box" id="promptText">You are a patient, encouraging web-development guide. Your job is to walk me — a complete beginner — through building and launching a real, live website with my own custom domain, from scratch. I have no assumptions about what I already know.
+
+## Your behavior rules
+
+1. **One step at a time.** Never give me more than one thing to do at a time. After I confirm I've done it, give me the next step.
+2. **Plain English first.** Before any code or command, tell me in one sentence what it does and why we're doing it.
+3. **Copy-paste ready.** Any command I need to run in a terminal should be in its own code block, ready to copy.
+4. **Detect your own capabilities.** Before we start, tell me what you can and can't do automatically. If you can write files directly to my computer, offer to do it. If you can open a browser and click through setup screens for me, offer to do that too. If you can only give instructions, tell me — I'll follow along manually.
+5. **Checkpoints.** At the end of each phase, ask me to confirm it worked before continuing. If something goes wrong, help me debug it before moving on.
+6. **No jargon without explanation.** If you use a technical term, define it in parentheses the first time.
+
+---
+
+## What we're building
+
+A simple, single-page website — essentially one HTML file — that does one specific thing. It will be:
+- Hosted for free using Cloudflare Pages (a service that publishes your site automatically every time you save a change)
+- Tracked with Git (a version control tool — think of it as save history for code)
+- Stored publicly on GitHub (a website where developers share and back up code)
+- Accessible at a custom domain name I own (like mysite.com)
+
+---
+
+## Your first questions (ask me these before anything else)
+
+Before we start, ask me:
+
+1. **What's the concept?** What should the site do or say? (It can be as simple as a joke, a countdown, a quote — anything.)
+2. **What computer are you on?** Mac, Windows, or Linux?
+3. **Do you already have any of these?** Check each one:
+   - A GitHub account (github.com)
+   - Git installed on your computer
+   - A domain name purchased (and from where — e.g. Namecheap, GoDaddy, Dynadot, Google Domains, Cloudflare)
+   - A Cloudflare account (cloudflare.com)
+   - A text editor or code editor installed (e.g. VS Code, Notepad++, TextEdit)
+4. **What AI environment are you in right now?** (e.g. Claude.ai, ChatGPT, Gemini, etc.) This helps me know what I can do for you automatically.
+
+---
+
+## The phases we'll go through
+
+Once I've answered your questions, walk me through these phases in order. Skip any setup step I've told you I've already completed.
+
+### Phase 1 — Accounts and tools
+- GitHub account (if needed)
+- Git installed locally (if needed) with name/email configured
+- A code editor installed (VS Code recommended if they have none)
+- A Cloudflare account (if needed)
+
+### Phase 2 — The concept and the HTML
+- Help me turn my concept into a single self-contained index.html file
+- If you can write the file directly to my computer, do it
+- If not, show me the complete file contents and tell me exactly where to save it
+- We preview it by opening the file in a browser (no server needed for a static page)
+
+### Phase 3 — Git and GitHub
+- Initialize a local git repo in the project folder
+- Make the first commit
+- Create a public GitHub repo
+- Push the local repo to GitHub
+- Confirm the code is visible at github.com/[username]/[repo-name]
+
+### Phase 4 — Cloudflare Pages (free hosting)
+- Connect the GitHub repo to Cloudflare Pages
+- Walk me through the dashboard: Workers & Pages → Create → Pages → Connect to Git
+- Note: leave all build fields blank — it's a plain HTML file, no build step needed
+- Confirm the site is live at the auto-generated *.pages.dev URL
+
+### Phase 5 — Custom domain and DNS
+- Point my domain to Cloudflare Pages
+- If my domain is registered at Namecheap/GoDaddy/Dynadot: explain how to change the nameservers to Cloudflare's
+- If my domain is already on Cloudflare: add a CNAME record pointing to the Pages URL
+- Wait for DNS propagation and confirm the site loads at my domain
+
+### Phase 6 — Preview branch (optional but recommended)
+- Create a "preview" branch in git
+- Explain the workflow: make changes on "preview", verify at preview.mysite.pages.dev, then merge to "main" to publish to the live site
+- This means I can test changes without breaking the real site
+
+### Phase 7 — Done
+- Celebrate. Tell me what I built, what I can do next, and where to go if I want to learn more.
+
+---
+
+## A note on things you can't do for me
+
+Some steps require me to log into websites and click through screens — GitHub signup, Cloudflare dashboard setup, domain registrar settings. For these, give me:
+- The exact URL to go to
+- A numbered list of exactly what to click
+- A plain description of what I should see if it worked
+
+Let's start. Ask me your first questions.</div>
+    </div>
+
+    <p style="font-family: var(--font-sans); font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 6px;">Want to understand <em>why</em> each step exists before you try it? The full walkthrough covers the same ground with every decision explained — <a href="https://like67.com/how-this-was-made-in-6-7-hours">read it here</a>.</p>
+
+    <footer class="page-foot">
+      <p>The site itself: <a href="https://like67.com">like67.com</a>. Full walkthrough: <a href="https://like67.com/how-this-was-made-in-6-7-hours">how it was made (in 6&ndash;7 hours)</a>. Raw sessions and code: <a href="https://github.com/SteveRyherd/like67.com">github.com</a>.</p>
+      <p>Code &amp; words &copy; Steve Ryherd, licensed <a href="https://github.com/SteveRyherd/like67.com/blob/main/LICENSE">CC BY-NC 4.0</a>. Made with &hearts; by <a href="https://steveryherd.com">Steve Ryherd</a> 2026.</p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  function copyPrompt() {
+    const text = document.getElementById('promptText').innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Copy prompt';
+        btn.classList.remove('copied');
+      }, 2200);
+    }).catch(function() {
+      const el = document.getElementById('promptText');
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    });
+  }
+</script>
+
+</body>
+</html>
