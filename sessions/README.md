@@ -28,3 +28,6 @@ Each session captures:
 - [012 — The placard](./012-the-placard.md) — wrote `STORY.md`, the first-person origin essay; linked from `README.md`
 - [013 — README restructure](./013-readme-restructure.md) — `STORY.md` made the front door; mission pinned; `ROADMAP.md` added to file list; sessions index completed
 - [014 — Tutorial design pass](./014-tutorial-design.md) — locked in chronological + two-column shape, scope-cut to seven idea-to-live sections, shipped `/how-this-was-made-in-6-7-hours/` with §1 fully fleshed and §2–§7 stubbed; main-site corner-link repointed
+- [015 — Flesh out tutorial sections (§2–§7)](./015-flesh-out-s2-s4.md) — wrote all six remaining tutorial sections in one pass; locked in the zero-programming-knowledge writing standard for both columns
+- [016 — DIY prompt and "how it was made" landing page](./016-diy-prompt-landing-page.md) — distilled all sessions into a single copyable AI prompt; shipped it at `/make-your-own/` as a layered landing page with a five-row layer nav
+- [017 — Soft launch](./017-soft-launch.md) — Phase 3 kickoff; staged copy for Show HN, Bluesky, LinkedIn, and Reddit, with a launch-day response playbook

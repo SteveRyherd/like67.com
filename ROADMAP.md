@@ -30,8 +30,8 @@ The tutorial intentionally covers **only the seven sessions on the idea-to-live 
 - [x] **Session 014 — Tutorial design pass.** Designed the page structure, two-column shape, raw-transcript callout, accordion concepts, question triad. Shipped the page shell at `/how-this-was-made-in-6-7-hours/`, with **§1 (Session 000)** fully fleshed and §2–§7 stubbed. Repointed the main site's corner-link from GitHub to the tutorial.
 - [x] **Session 015 — Flesh out §2–§4.** Apply the template to: §2 Saving the work (Session 002), §3 On the internet (Session 003), §4 Looking right on phones (Session 004 + chant fix from 005).
 - [x] **Session 016 — Flesh out §5–§7.** Folded into Session 015 — all seven sections fleshed in one pass.
-- [ ] **Session 016 — Glossary.** Twenty-ish terms in plain English drawn from the concepts introduced across all seven tutorial sections: repo, branch, push, deploy, manifest, OG, PWA, DNS, CDN, etc. Lives in `GLOSSARY.md`. The tutorial's accordion concepts deep-link individual entries.
-- [ ] **Session 017 — Template + gallery.** The "make your own" path. `template/` folder containing a stripped-down meme site, 5-step README in plain English, `GALLERY.md` with one or two seeded examples and a "yours could be here" slot.
+- [ ] **Glossary (deferred).** Twenty-ish terms in plain English drawn from the concepts introduced across all seven tutorial sections: repo, branch, push, deploy, manifest, OG, PWA, DNS, CDN, etc. Lives in `GLOSSARY.md`. The tutorial's accordion concepts deep-link individual entries. *Originally Session 016, then 017 — bumped behind the soft launch.*
+- [ ] **Template + gallery (deferred).** The "make your own" path. `template/` folder containing a stripped-down meme site, 5-step README in plain English, `GALLERY.md` with one or two seeded examples and a "yours could be here" slot.
 
 *Phase 2 done when: a kid who's hooked has somewhere concrete to go, the words to understand what they're reading, and an interactive tutorial that primes them to keep asking their own AI.*
 
@@ -39,7 +39,7 @@ The tutorial intentionally covers **only the seven sessions on the idea-to-live 
 
 Foundation and on-ramp shipped. Phase 3 gives the artifact reasons to spread and reasons to compound.
 
-- [ ] **Session 019 — Soft launch.** Show HN post, r/internetisbeautiful submission, parents-on-Twitter thread. The angle isn't the site, it's the placard's story. Watch the analytics.
+- [x] **Session 017 — Soft launch.** Pulled forward from session 019 by audible. Channels: Show HN, Bluesky, LinkedIn, r/internetisbeautiful + crosspost to r/coolwebsites. Wed May 6, 8:30 AM ET for the HN/Bluesky/LinkedIn cluster; Sat May 9 morning for Reddit. Copy and response playbook staged in `sessions/017-soft-launch.md`.
 - [ ] **Sessions 020-025 (rough scope) — Sponsor mechanic.** Multi-session build: schema and architecture, brainrot-tone submission UI, Stripe Checkout with 18+ gate, realtime push (PartyKit or Cloudflare Workers + D1 + Durable Objects) + ticker, moderation pipeline, historic page, then go-live. Curated submissions only (real first name + verified city, soft-moderated) to keep COPPA-clean. The big one — not critical to soft launch, intentionally placed after.
 
 ## Standing patterns (every session forward)
